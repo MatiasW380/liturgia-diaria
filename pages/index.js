@@ -1,55 +1,62 @@
-import { useEffect, useState } from 'react';
+import Layout from '../components/Layout';
+import Link from 'next/link';
 
 export default function Home() {
-  const [evangelio, setEvangelio] = useState('Cargando evangelio...');
-  const [comentario, setComentario] = useState('Cargando comentario...');
-  const [laudes, setLaudes] = useState('Cargando Laudes...');
-  const [visperas, setVisperas] = useState('Cargando Vísperas...');
-  const [completas, setCompletas] = useState('Cargando Completas...');
-
-  useEffect(() => {
-    // Por ahora mostramos datos de ejemplo
-    setEvangelio('📖 "El que tenga oídos para oír, que oiga" (Mateo 13, 9)');
-    setComentario('✝️ "El Evangelio nos invita a abrir el corazón a la Palabra de Dios" - Papa Francisco');
-    setLaudes('🌅 Oración de la mañana: "Señor, te alabo por este nuevo día..."');
-    setVisperas('🌇 Oración de la tarde: "Gracias, Señor, por tu fidelidad..."');
-    setCompletas('🌙 Oración de la noche: "En tus manos, Señor, encomiendo mi espíritu..."');
-  }, []);
+  const opciones = [
+    { icono: '📖', nombre: 'Evangelio del Día', descripcion: 'La Palabra de Dios para hoy', ruta: '/evangelio', color: '#c0392b' },
+    { icono: '⛪', nombre: 'Santo del Día', descripcion: 'Conoce al santo que celebramos hoy', ruta: '/santo', color: '#8e44ad' },
+    { icono: '✝️', nombre: 'Reflexión del Día', descripcion: 'Comentario del Papa Francisco', ruta: '/reflexion', color: '#856404' },
+    { icono: '🌅', nombre: 'Laudes', descripcion: 'Oración de la mañana', ruta: '/laudes', color: '#0c5460' },
+    { icono: '🌇', nombre: 'Vísperas', descripcion: 'Oración del atardecer', ruta: '/visperas', color: '#155724' },
+    { icono: '🌙', nombre: 'Completas', descripcion: 'Oración antes de dormir', ruta: '/completas', color: '#383d41' },
+  ];
 
   return (
-    <div style={{ maxWidth: '800px', margin: '0 auto', padding: '20px', fontFamily: 'Arial' }}>
-      <h1 style={{ color: '#1a1a1a', borderBottom: '3px solid #c0392b', paddingBottom: '10px' }}>
-        📖 Liturgia del Día
+    <Layout>
+      <h1 style={{ textAlign: 'center', color: '#2c3e50', marginBottom: '10px' }}>
+        📖 Liturgia Diaria
       </h1>
-      
-      <div style={{ background: '#f8f9fa', padding: '20px', borderRadius: '10px', margin: '20px 0' }}>
-        <h2 style={{ color: '#c0392b' }}>📖 Evangelio</h2>
-        <p style={{ fontSize: '18px', lineHeight: '1.6' }}>{evangelio}</p>
+      <p style={{ textAlign: 'center', color: '#666', marginBottom: '30px', fontSize: '18px' }}>
+        {new Date().toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' })}
+      </p>
+
+      <div style={{ display: 'grid', gap: '15px' }}>
+        {opciones.map((opcion) => (
+          <Link key={opcion.ruta} href={opcion.ruta}>
+            <div style={{
+              backgroundColor: 'white',
+              padding: '20px',
+              borderRadius: '12px',
+              boxShadow: '0 2px 10px rgba(0,0,0,0.08)',
+              cursor: 'pointer',
+              transition: 'transform 0.2s, box-shadow 0.2s',
+              borderLeft: `5px solid ${opcion.color}`,
+              display: 'flex',
+              alignItems: 'center',
+              gap: '15px'
+            }}>
+              <span style={{ fontSize: '40px' }}>{opcion.icono}</span>
+              <div>
+                <h3 style={{ margin: 0, color: '#2c3e50' }}>{opcion.nombre}</h3>
+                <p style={{ margin: '5px 0 0 0', color: '#666', fontSize: '14px' }}>{opcion.descripcion}</p>
+              </div>
+            </div>
+          </Link>
+        ))}
       </div>
 
-      <div style={{ background: '#fff3cd', padding: '20px', borderRadius: '10px', margin: '20px 0' }}>
-        <h2 style={{ color: '#856404' }}>✝️ Comentario del Papa</h2>
-        <p style={{ fontSize: '16px', lineHeight: '1.6' }}>{comentario}</p>
-      </div>
-
-      <div style={{ background: '#d1ecf1', padding: '20px', borderRadius: '10px', margin: '20px 0' }}>
-        <h2 style={{ color: '#0c5460' }}>🌅 Laudes (Mañana)</h2>
-        <p>{laudes}</p>
-      </div>
-
-      <div style={{ background: '#d4edda', padding: '20px', borderRadius: '10px', margin: '20px 0' }}>
-        <h2 style={{ color: '#155724' }}>🌇 Vísperas (Tarde)</h2>
-        <p>{visperas}</p>
-      </div>
-
-      <div style={{ background: '#e2e3e5', padding: '20px', borderRadius: '10px', margin: '20px 0' }}>
-        <h2 style={{ color: '#383d41' }}>🌙 Completas (Noche)</h2>
-        <p>{completas}</p>
-      </div>
-
-      <footer style={{ textAlign: 'center', marginTop: '40px', color: '#666', fontSize: '14px' }}>
-        📅 {new Date().toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}
-      </footer>
-    </div>
+      <style jsx>{`
+        @media (min-width: 768px) {
+          div {
+            grid-template-columns: 1fr 1fr;
+          }
+        }
+        @media (min-width: 1024px) {
+          div {
+            grid-template-columns: 1fr 1fr 1fr;
+          }
+        }
+      `}</style>
+    </Layout>
   );
 }
