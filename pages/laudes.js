@@ -1,6 +1,7 @@
+// pages/laudes.js
 import Layout from '../components/Layout';
 import { useEffect, useState } from 'react';
-import { obtenerLaudes } from '../lib/liturgia';
+import { obtenerLaudes } from '../lib/liturgiaHoras';
 
 export default function Laudes() {
   const [datos, setDatos] = useState(null);
@@ -32,27 +33,27 @@ export default function Laudes() {
 
         <div style={{ backgroundColor: 'white', padding: '20px', borderRadius: '8px', marginBottom: '15px' }}>
           <h4 style={{ marginTop: 0, color: '#0c5460' }}>Invitación</h4>
-          <p>{datos.invitacion}</p>
+          <p style={{ margin: 0 }}>{datos.invitacion}</p>
         </div>
 
         <div style={{ backgroundColor: 'white', padding: '20px', borderRadius: '8px', marginBottom: '15px' }}>
           <h4 style={{ marginTop: 0, color: '#0c5460' }}>Himno</h4>
-          <p style={{ fontStyle: 'italic' }}>{datos.himno}</p>
+          <p style={{ fontStyle: 'italic', whiteSpace: 'pre-line', margin: 0 }}>{datos.himno}</p>
         </div>
 
         <div style={{ backgroundColor: 'white', padding: '20px', borderRadius: '8px', marginBottom: '15px' }}>
           <h4 style={{ marginTop: 0, color: '#0c5460' }}>Salmodia</h4>
-          <p>{datos.salmodia}</p>
+          <p style={{ whiteSpace: 'pre-line', margin: 0 }}>{datos.salmodia}</p>
         </div>
 
         <div style={{ backgroundColor: 'white', padding: '20px', borderRadius: '8px', marginBottom: '15px' }}>
           <h4 style={{ marginTop: 0, color: '#0c5460' }}>Cánticos</h4>
-          <p style={{ fontStyle: 'italic' }}>{datos.canticos}</p>
+          <p style={{ fontStyle: 'italic', whiteSpace: 'pre-line', margin: 0 }}>{datos.canticos}</p>
         </div>
 
         <div style={{ backgroundColor: 'white', padding: '20px', borderRadius: '8px' }}>
           <h4 style={{ marginTop: 0, color: '#0c5460' }}>Oración Final</h4>
-          <p>{datos.oracion}</p>
+          <p style={{ whiteSpace: 'pre-line', margin: 0 }}>{datos.oracion}</p>
         </div>
       </div>
     </Layout>
