@@ -6,27 +6,37 @@ export default function Layout({ children }) {
 
   const opciones = [
     { icono: '📖', nombre: 'Evangelio', ruta: '/evangelio' },
-    { icono: '⛪', nombre: 'Santo del Día', ruta: '/santo' },
+    { icono: '⛪', nombre: 'Santo', ruta: '/santo' },
     { icono: '✝️', nombre: 'Reflexión', ruta: '/reflexion' },
-    { icono: '🌅', nombre: 'Laudes', ruta: '/laudes' },
-    { icono: '🌇', nombre: 'Vísperas', ruta: '/visperas' },
-    { icono: '🌙', nombre: 'Completas', ruta: '/completas' },
+    { icono: '🕯️', nombre: 'Liturgia', ruta: '/liturgia-horas' },
   ];
 
   return (
-    <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px' }}>
+    <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 15px' }}>
       {/* Encabezado con menú */}
       <header style={{
         backgroundColor: '#2c3e50',
         color: 'white',
-        padding: '15px 20px',
+        padding: '12px 15px',
         borderRadius: '10px',
-        marginTop: '20px'
+        marginTop: '15px',
+        position: 'relative'
       }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <h1 style={{ fontSize: '24px', margin: 0 }}>
-            📖 Liturgia Diaria
-          </h1>
+        <div style={{ 
+          display: 'flex', 
+          justifyContent: 'space-between', 
+          alignItems: 'center',
+          flexWrap: 'wrap'
+        }}>
+          <Link href="/" style={{ textDecoration: 'none', color: 'white' }}>
+            <h1 style={{ 
+              fontSize: 'clamp(1.1rem, 4vw, 1.6rem)', 
+              margin: 0,
+              cursor: 'pointer'
+            }}>
+              📖 Liturgia Diaria
+            </h1>
+          </Link>
           
           {/* Botón menú hamburguesa (móvil) */}
           <button
@@ -35,10 +45,12 @@ export default function Layout({ children }) {
               background: 'none',
               border: 'none',
               color: 'white',
-              fontSize: '30px',
+              fontSize: 'clamp(1.5rem, 5vw, 2rem)',
               cursor: 'pointer',
-              display: 'block'
+              padding: '5px 10px',
+              touchAction: 'manipulation'
             }}
+            aria-label="Menú"
           >
             ☰
           </button>
@@ -47,17 +59,21 @@ export default function Layout({ children }) {
         {/* Menú de navegación */}
         <nav style={{
           display: menuAbierto ? 'block' : 'none',
-          marginTop: '15px'
+          marginTop: '12px',
+          paddingTop: '12px',
+          borderTop: '1px solid rgba(255,255,255,0.15)'
         }}>
           {opciones.map((opcion) => (
             <Link key={opcion.ruta} href={opcion.ruta}>
               <div style={{
                 padding: '12px 15px',
-                margin: '5px 0',
-                backgroundColor: 'rgba(255,255,255,0.1)',
+                margin: '4px 0',
+                backgroundColor: 'rgba(255,255,255,0.08)',
                 borderRadius: '8px',
                 cursor: 'pointer',
-                transition: 'background-color 0.3s'
+                transition: 'background-color 0.2s',
+                touchAction: 'manipulation',
+                fontSize: 'clamp(0.95rem, 2.5vw, 1.05rem)'
               }}>
                 {opcion.icono} {opcion.nombre}
               </div>
@@ -67,40 +83,66 @@ export default function Layout({ children }) {
       </header>
 
       {/* Contenido principal */}
-      <main style={{ marginTop: '30px' }}>
+      <main style={{ marginTop: '20px', paddingBottom: '20px' }}>
         {children}
       </main>
 
       {/* Pie de página */}
       <footer style={{
         textAlign: 'center',
-        marginTop: '50px',
-        padding: '20px',
+        marginTop: '40px',
+        padding: '20px 0',
         borderTop: '2px solid #e0e0e0',
-        color: '#666',
-        fontSize: '14px'
+        color: '#888',
+        fontSize: 'clamp(0.7rem, 1.8vw, 0.85rem)'
       }}>
-        <p>📅 {new Date().toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
-        <p>Uso personal - Basado en Vatican News y breviarium</p>
+        <p style={{ margin: '3px 0' }}>
+          📅 {new Date().toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}
+        </p>
+        <p style={{ margin: '3px 0' }}>
+          Uso personal • Basado en Vatican News y breviarium
+        </p>
       </footer>
 
-      {/* Estilos responsive (CSS embebido) */}
+      {/* Estilos responsive */}
       <style jsx>{`
         @media (min-width: 768px) {
           header {
-            padding: 15px 30px;
+            padding: 15px 25px !important;
           }
           button {
             display: none !important;
           }
           nav {
             display: flex !important;
-            gap: 10px;
+            gap: 8px !important;
             margin-top: 10px !important;
+            padding-top: 10px !important;
+            border-top: 1px solid rgba(255,255,255,0.15) !important;
           }
           nav div {
             flex: 1;
             text-align: center;
+            padding: 10px 5px !important;
+            margin: 0 !important;
+          }
+        }
+        @media (min-width: 1024px) {
+          header {
+            padding: 18px 30px !important;
+          }
+          nav {
+            gap: 12px !important;
+          }
+        }
+        @media (hover: hover) {
+          nav div:hover {
+            background-color: rgba(255,255,255,0.2) !important;
+          }
+        }
+        @media (hover: none) {
+          nav div:active {
+            background-color: rgba(255,255,255,0.25) !important;
           }
         }
       `}</style>
