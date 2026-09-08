@@ -61,6 +61,24 @@ export default function Evangelio() {
 
         {datos && !cargando && (
           <>
+            {datos.celebracion && (
+              <div style={{
+                padding: '15px',
+                backgroundColor: '#e8f4f8',
+                borderRadius: '8px',
+                borderLeft: '4px solid #8e44ad',
+                marginBottom: '20px'
+              }}>
+                <h4 style={{ margin: '0 0 8px 0', color: '#8e44ad' }}>⛪ Celebración</h4>
+                <p style={{ margin: 0, fontSize: '15px' }}>{datos.celebracion}</p>
+                {datos.color && (
+                  <p style={{ margin: '5px 0 0 0', fontSize: '13px', color: '#666' }}>
+                    Color litúrgico: {datos.color}
+                  </p>
+                )}
+              </div>
+            )}
+
             <div style={{ 
               backgroundColor: '#f8f9fa', 
               padding: '15px 20px', 
@@ -88,24 +106,6 @@ export default function Evangelio() {
             <div style={{ lineHeight: '1.8' }}>
               <p style={{ whiteSpace: 'pre-line' }}>{datos.evangelio}</p>
             </div>
-
-            {datos.celebracion && (
-              <div style={{
-                marginTop: '25px',
-                padding: '15px',
-                backgroundColor: '#e8f4f8',
-                borderRadius: '8px',
-                borderLeft: '4px solid #8e44ad'
-              }}>
-                <h4 style={{ margin: '0 0 8px 0', color: '#8e44ad' }}>⛪ Celebración</h4>
-                <p style={{ margin: 0, fontSize: '15px' }}>{datos.celebracion}</p>
-                {datos.color && (
-                  <p style={{ margin: '5px 0 0 0', fontSize: '13px', color: '#666' }}>
-                    Color litúrgico: {datos.color}
-                  </p>
-                )}
-              </div>
-            )}
           </>
         )}
       </div>
