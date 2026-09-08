@@ -61,6 +61,15 @@ export default function Evangelio() {
 
         {datos && !cargando && (
           <>
+            <p style={{ fontSize: '14px', color: '#888', textAlign: 'center', marginBottom: '15px' }}>
+              📅 {new Date(datos.fecha).toLocaleDateString('es-ES', { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric',
+                weekday: 'long'
+              })}
+            </p>
+
             {datos.celebracion && (
               <div style={{
                 padding: '15px',
@@ -93,14 +102,6 @@ export default function Evangelio() {
                   Traducción: {datos.traduccion}
                 </p>
               )}
-              <p style={{ fontSize: '14px', color: '#888', marginTop: '8px' }}>
-                📅 {new Date(datos.fecha).toLocaleDateString('es-ES', { 
-                  year: 'numeric', 
-                  month: 'long', 
-                  day: 'numeric',
-                  weekday: 'long'
-                })}
-              </p>
             </div>
 
             <div style={{ lineHeight: '1.8' }}>
