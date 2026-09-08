@@ -47,4 +47,15 @@ export default function Completas() {
         </div>
 
         <div style={{ backgroundColor: 'white', padding: '20px', borderRadius: '8px', marginBottom: '15px' }}>
-          <h4 style={{ marginTop: 0, color: '#
+          <h4 style={{ marginTop: 0, color: '#383d41' }}>Cánticos</h4>
+          <p style={{ fontStyle: 'italic', whiteSpace: 'pre-line', margin: 0 }}>{datos.canticos}</p>
+        </div>
+
+        <div style={{ backgroundColor: 'white', padding: '20px', borderRadius: '8px' }}>
+          <h4 style={{ marginTop: 0, color: '#383d41' }}>Oración Final</h4>
+          <p style={{ whiteSpace: 'pre-line', margin: 0 }}>{datos.oracion}</p>
+        </div>
+      </div>
+    </Layout>
+  );
+}
