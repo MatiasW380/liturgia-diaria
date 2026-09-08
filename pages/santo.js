@@ -1,7 +1,7 @@
 // pages/santo.js
 import Layout from '../components/Layout';
 import { useEffect, useState } from 'react';
-import { obtenerDatosLiturgicos } from '../lib/liturgiaApi';
+import { obtenerDatosLiturgicos } from '../lib/evangelioApi';
 
 export default function Santo() {
   const [datos, setDatos] = useState(null);
@@ -106,18 +106,6 @@ export default function Santo() {
                 🎨 Color litúrgico: <strong>{datos.color}</strong>
               </div>
             )}
-
-            <div style={{ 
-              marginTop: '25px', 
-              padding: '15px', 
-              backgroundColor: '#fff3cd',
-              borderRadius: '8px',
-              borderLeft: '4px solid #856404'
-            }}>
-              <p style={{ margin: 0, fontSize: '14px', color: '#856404' }}>
-                📖 Fuente: LiturgicalCalendarAPI
-              </p>
-            </div>
           </>
         )}
       </div>
