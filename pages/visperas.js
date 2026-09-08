@@ -27,27 +27,27 @@ export default function Visperas() {
       <div className="card card-visperas">
         <h2 className="card-title">{datos.titulo}</h2>
         
-        <div style={{ textAlign: 'center', color: '#666', marginBottom: '20px' }}>
+        <div style={{ textAlign: 'center', color: '#9aa0a8', marginBottom: '20px' }}>
           <p style={{ margin: 0 }}>📅 {datos.fecha}</p>
         </div>
 
-        <div style={{ backgroundColor: 'white', padding: '20px', borderRadius: '8px', marginBottom: '15px' }}>
-          <h4 style={{ marginTop: 0, color: '#155724' }}>Himno</h4>
+        <div style={{ backgroundColor: '#21262e', padding: '20px', borderRadius: '8px', marginBottom: '15px' }}>
+          <h4 style={{ marginTop: 0, color: '#c9a44c', fontFamily: "'Lora', Georgia, serif" }}>Himno</h4>
           <p style={{ fontStyle: 'italic', whiteSpace: 'pre-line', margin: 0 }}>{datos.himno}</p>
         </div>
 
-        <div style={{ backgroundColor: 'white', padding: '20px', borderRadius: '8px', marginBottom: '15px' }}>
-          <h4 style={{ marginTop: 0, color: '#155724' }}>Salmodia</h4>
+        <div style={{ backgroundColor: '#21262e', padding: '20px', borderRadius: '8px', marginBottom: '15px' }}>
+          <h4 style={{ marginTop: 0, color: '#c9a44c', fontFamily: "'Lora', Georgia, serif" }}>Salmodia</h4>
           <p style={{ whiteSpace: 'pre-line', margin: 0 }}>{datos.salmodia}</p>
         </div>
 
-        <div style={{ backgroundColor: 'white', padding: '20px', borderRadius: '8px', marginBottom: '15px' }}>
-          <h4 style={{ marginTop: 0, color: '#155724' }}>Cánticos</h4>
+        <div style={{ backgroundColor: '#21262e', padding: '20px', borderRadius: '8px', marginBottom: '15px' }}>
+          <h4 style={{ marginTop: 0, color: '#c9a44c', fontFamily: "'Lora', Georgia, serif" }}>Cánticos</h4>
           <p style={{ fontStyle: 'italic', whiteSpace: 'pre-line', margin: 0 }}>{datos.canticos}</p>
         </div>
 
-        <div style={{ backgroundColor: 'white', padding: '20px', borderRadius: '8px' }}>
-          <h4 style={{ marginTop: 0, color: '#155724' }}>Oración Final</h4>
+        <div style={{ backgroundColor: '#21262e', padding: '20px', borderRadius: '8px' }}>
+          <h4 style={{ marginTop: 0, color: '#c9a44c', fontFamily: "'Lora', Georgia, serif" }}>Oración Final</h4>
           <p style={{ whiteSpace: 'pre-line', margin: 0 }}>{datos.oracion}</p>
         </div>
       </div>

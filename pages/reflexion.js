@@ -35,18 +35,18 @@ export default function Reflexion() {
 
         {cargando && (
           <div style={{ textAlign: 'center', padding: '40px 20px' }}>
-            <p style={{ fontSize: '18px', color: '#666' }}>⏳ Cargando la reflexión de hoy...</p>
+            <p style={{ fontSize: '18px', color: '#9aa0a8' }}>⏳ Cargando la reflexión de hoy...</p>
           </div>
         )}
 
         {(error || (datos && datos.error)) && (
           <div style={{
-            backgroundColor: '#f8d7da',
+            backgroundColor: 'rgba(162, 68, 68, 0.15)',
             padding: '20px',
             borderRadius: '8px',
-            borderLeft: '4px solid #dc3545'
+            borderLeft: '3px solid #a24444'
           }}>
-            <p style={{ margin: 0, color: '#721c24' }}>
+            <p style={{ margin: 0, color: '#e8e3d8' }}>
               ⚠️ No se pudo cargar la reflexión. Por favor, intentá más tarde.
             </p>
           </div>
@@ -63,11 +63,11 @@ export default function Reflexion() {
                 fontWeight: 'bold',
                 textAlign: 'right',
                 marginTop: '20px',
-                color: '#c0392b'
+                color: '#c9a44c'
               }}>
                 {datos.papa}
                 {datos.fuenteCita && (
-                  <span style={{ display: 'block', fontWeight: 'normal', fontSize: '13px', color: '#888' }}>
+                  <span style={{ display: 'block', fontWeight: 'normal', fontSize: '13px', color: '#9aa0a8' }}>
                     {datos.fuenteCita}
                   </span>
                 )}

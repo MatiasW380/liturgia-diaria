@@ -11,7 +11,7 @@ async function obtenerLecturas() {
 function Acordeon({ id, abierto, onToggle, etiqueta, cita, children }) {
   return (
     <div style={{
-      border: '1px solid #e0e0e0',
+      border: '1px solid rgba(232, 227, 216, 0.12)',
       borderRadius: '8px',
       marginBottom: '12px',
       overflow: 'hidden',
@@ -21,8 +21,10 @@ function Acordeon({ id, abierto, onToggle, etiqueta, cita, children }) {
         style={{
           width: '100%',
           textAlign: 'left',
-          background: '#f8f9fa',
+          background: '#21262e',
           border: 'none',
+          color: '#e8e3d8',
+          fontFamily: "'Lora', Georgia, serif",
           padding: '14px 18px',
           cursor: 'pointer',
           display: 'flex',
@@ -33,9 +35,9 @@ function Acordeon({ id, abierto, onToggle, etiqueta, cita, children }) {
       >
         <span>
           <strong>{etiqueta}</strong>
-          {cita && <span style={{ color: '#888', marginLeft: '10px', fontSize: '14px' }}>{cita}</span>}
+          {cita && <span style={{ color: '#9aa0a8', marginLeft: '10px', fontSize: '14px' }}>{cita}</span>}
         </span>
-        <span style={{ fontSize: '14px', color: '#888' }}>{abierto ? '▲' : '▼'}</span>
+        <span style={{ fontSize: '14px', color: '#c9a44c' }}>{abierto ? '▲' : '▼'}</span>
       </button>
       {abierto && (
         <div style={{ padding: '18px', lineHeight: '1.8' }}>
@@ -76,18 +78,18 @@ export default function Evangelio() {
 
         {cargando && (
           <div style={{ textAlign: 'center', padding: '40px 20px' }}>
-            <p style={{ fontSize: '18px', color: '#666' }}>⏳ Cargando las lecturas de hoy...</p>
+            <p style={{ fontSize: '18px', color: '#9aa0a8' }}>⏳ Cargando las lecturas de hoy...</p>
           </div>
         )}
 
         {error && (
           <div style={{
-            backgroundColor: '#f8d7da',
+            backgroundColor: 'rgba(162, 68, 68, 0.15)',
             padding: '20px',
             borderRadius: '8px',
-            borderLeft: '4px solid #dc3545'
+            borderLeft: '3px solid #a24444'
           }}>
-            <p style={{ margin: 0, color: '#721c24' }}>
+            <p style={{ margin: 0, color: '#e8e3d8' }}>
               ⚠️ No se pudieron cargar las lecturas. Por favor, intentá más tarde.
             </p>
           </div>
@@ -95,7 +97,7 @@ export default function Evangelio() {
 
         {datos && !cargando && (
           <>
-            <p style={{ fontSize: '14px', color: '#888', textAlign: 'center', marginBottom: '15px' }}>
+            <p style={{ fontSize: '14px', color: '#9aa0a8', textAlign: 'center', marginBottom: '15px' }}>
               📅 {new Date(datos.fecha).toLocaleDateString('es-ES', {
                 year: 'numeric',
                 month: 'long',
@@ -107,13 +109,13 @@ export default function Evangelio() {
             {datos.celebracion && (
               <div style={{
                 padding: '15px',
-                backgroundColor: '#e8f4f8',
+                backgroundColor: '#21262e',
                 borderRadius: '8px',
-                borderLeft: '4px solid #8e44ad',
+                borderLeft: '3px solid #c9a44c',
                 marginBottom: '20px'
               }}>
-                <h4 style={{ margin: '0 0 8px 0', color: '#8e44ad' }}>⛪ Celebración</h4>
-                <p style={{ margin: 0, fontSize: '15px' }}>{datos.celebracion}</p>
+                <h4 style={{ margin: '0 0 8px 0', color: '#c9a44c', fontFamily: "'Lora', Georgia, serif" }}>⛪ Celebración</h4>
+                <p style={{ margin: 0, fontSize: '15px', color: '#e8e3d8' }}>{datos.celebracion}</p>
               </div>
             )}
 

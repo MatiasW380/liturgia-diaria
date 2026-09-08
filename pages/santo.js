@@ -35,34 +35,34 @@ export default function Santo() {
 
         {cargando && (
           <div style={{ textAlign: 'center', padding: '40px 20px' }}>
-            <p style={{ fontSize: '18px', color: '#666' }}>⏳ Cargando el santoral de hoy...</p>
+            <p style={{ fontSize: '18px', color: '#9aa0a8' }}>⏳ Cargando el santoral de hoy...</p>
           </div>
         )}
 
         {(error || (datos && datos.error)) && (
           <div style={{
-            backgroundColor: '#f8d7da',
+            backgroundColor: 'rgba(162, 68, 68, 0.15)',
             padding: '20px',
             borderRadius: '8px',
-            borderLeft: '4px solid #dc3545'
+            borderLeft: '3px solid #a24444'
           }}>
-            <p style={{ margin: 0, color: '#721c24' }}>
+            <p style={{ margin: 0, color: '#e8e3d8' }}>
               ⚠️ No se pudo cargar el santoral. Por favor, intentá más tarde.
             </p>
           </div>
         )}
 
         {datos && !cargando && !datos.error && datos.santos.length === 0 && (
-          <p style={{ color: '#666' }}>No hay información del santoral para hoy.</p>
+          <p style={{ color: '#9aa0a8' }}>No hay información del santoral para hoy.</p>
         )}
 
         {datos && !cargando && datos.santos.map((santo, i) => (
           <div key={i} style={{
             marginBottom: '25px',
             paddingBottom: '25px',
-            borderBottom: i < datos.santos.length - 1 ? '1px solid #eee' : 'none',
+            borderBottom: i < datos.santos.length - 1 ? '1px solid rgba(232, 227, 216, 0.10)' : 'none',
           }}>
-            <h3 style={{ color: '#8e44ad', marginBottom: '10px' }}>{santo.titulo}</h3>
+            <h3 style={{ color: '#c9a44c', fontFamily: "'Lora', Georgia, serif", marginBottom: '10px' }}>{santo.titulo}</h3>
             {santo.imagen && (
               <img
                 src={santo.imagen}

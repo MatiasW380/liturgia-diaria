@@ -9,24 +9,21 @@ export default function LiturgiaHoras() {
       nombre: 'Laudes', 
       descripcion: 'Oración de la mañana',
       ruta: '/laudes', 
-      color: '#0c5460',
-      bg: '#d1ecf1'
+      color: '#c9a44c',
     },
     { 
       icono: '🌇', 
       nombre: 'Vísperas', 
       descripcion: 'Oración del atardecer',
       ruta: '/visperas', 
-      color: '#155724',
-      bg: '#d4edda'
+      color: '#c9a44c',
     },
     { 
       icono: '🌙', 
       nombre: 'Completas', 
       descripcion: 'Oración antes de dormir',
       ruta: '/completas', 
-      color: '#383d41',
-      bg: '#e2e3e5'
+      color: '#c9a44c',
     },
   ];
 
@@ -34,13 +31,14 @@ export default function LiturgiaHoras() {
     <Layout>
       <div style={{ textAlign: 'center', marginBottom: '25px' }}>
         <h1 style={{ 
-          color: '#2c3e50', 
+          color: '#e8e3d8', 
+          fontFamily: "'Lora', Georgia, serif",
           fontSize: 'clamp(1.5rem, 5vw, 2.2rem)',
           marginBottom: '5px'
         }}>
           🕯️ Liturgia de las Horas
         </h1>
-        <p style={{ color: '#666', fontSize: 'clamp(0.9rem, 2.5vw, 1rem)' }}>
+        <p style={{ color: '#9aa0a8', fontSize: 'clamp(0.9rem, 2.5vw, 1rem)' }}>
           {new Date().toLocaleDateString('es-ES', { 
             year: 'numeric', 
             month: 'long', 
@@ -49,7 +47,7 @@ export default function LiturgiaHoras() {
           })}
         </p>
         <p style={{ 
-          color: '#888', 
+          color: '#6b7178', 
           fontSize: 'clamp(0.8rem, 2vw, 0.9rem)',
           marginTop: '5px'
         }}>
@@ -65,10 +63,10 @@ export default function LiturgiaHoras() {
         {opciones.map((opcion) => (
           <Link key={opcion.ruta} href={opcion.ruta}>
             <div style={{
-              backgroundColor: opcion.bg,
+              backgroundColor: '#1b1f26',
               padding: '20px 25px',
               borderRadius: '12px',
-              boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
+              border: '1px solid rgba(232, 227, 216, 0.10)',
               cursor: 'pointer',
               transition: 'transform 0.2s, box-shadow 0.2s',
               borderLeft: `5px solid ${opcion.color}`,
@@ -94,7 +92,7 @@ export default function LiturgiaHoras() {
                 </h3>
                 <p style={{ 
                   margin: '3px 0 0 0', 
-                  color: '#555', 
+                  color: '#9aa0a8', 
                   fontSize: 'clamp(0.8rem, 2vw, 0.95rem)'
                 }}>
                   {opcion.descripcion}
@@ -108,11 +106,12 @@ export default function LiturgiaHoras() {
       <div style={{
         marginTop: '30px',
         padding: '15px',
-        backgroundColor: '#f8f9fa',
+        backgroundColor: '#1b1f26',
+        border: '1px solid rgba(232, 227, 216, 0.10)',
         borderRadius: '10px',
         textAlign: 'center',
         fontSize: 'clamp(0.75rem, 2vw, 0.85rem)',
-        color: '#888'
+        color: '#9aa0a8'
       }}>
         ⏰ Según la tradición de la Iglesia, las horas canónicas se rezan en estos momentos del día
       </div>
@@ -132,7 +131,7 @@ export default function LiturgiaHoras() {
         @media (hover: hover) {
           div div:hover {
             transform: translateY(-4px);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+            border-color: rgba(201, 164, 76, 0.35);
           }
         }
         @media (hover: none) {
