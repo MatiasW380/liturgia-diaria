@@ -5,7 +5,7 @@ export default function Home() {
   const opciones = [
     { 
       icono: '📖', 
-      nombre: 'Evangelio del Día', 
+      nombre: 'Lecturas de Hoy', 
       descripcion: 'La Palabra de Dios para hoy', 
       ruta: '/evangelio', 
       color: '#c0392b' 
@@ -19,8 +19,8 @@ export default function Home() {
     },
     { 
       icono: '✝️', 
-      nombre: 'Reflexión del Día', 
-      descripcion: 'Comentario del Papa Francisco', 
+      nombre: 'Reflexión', 
+      descripcion: 'Comentario del Papa', 
       ruta: '/reflexion', 
       color: '#856404' 
     },

@@ -5,10 +5,10 @@ export default function Layout({ children }) {
   const [menuAbierto, setMenuAbierto] = useState(false);
 
   const opciones = [
-    { icono: '📖', nombre: 'Evangelio', ruta: '/evangelio' },
-    { icono: '⛪', nombre: 'Santo', ruta: '/santo' },
+    { icono: '📖', nombre: 'Lecturas de hoy', ruta: '/evangelio' },
+    { icono: '⛪', nombre: 'Santo del día', ruta: '/santo' },
     { icono: '✝️', nombre: 'Reflexión', ruta: '/reflexion' },
-    { icono: '🕯️', nombre: 'Liturgia', ruta: '/liturgia-horas' },
+    { icono: '🕯️', nombre: 'Liturgia de las Horas', ruta: '/liturgia-horas' },
   ];
 
   return (
@@ -98,9 +98,6 @@ export default function Layout({ children }) {
       }}>
         <p style={{ margin: '3px 0' }}>
           📅 {new Date().toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}
-        </p>
-        <p style={{ margin: '3px 0' }}>
-          Uso personal • Basado en Vatican News y breviarium
         </p>
       </footer>
 
