@@ -34,7 +34,7 @@ export default function Layout({ children }) {
               margin: 0,
               cursor: 'pointer'
             }}>
-              📖 Liturgia Diaria
+              📖 Cristo en tu día
             </h1>
           </Link>
           

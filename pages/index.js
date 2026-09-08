@@ -41,7 +41,7 @@ export default function Home() {
         marginBottom: '5px',
         fontSize: 'clamp(1.5rem, 5vw, 2.5rem)'
       }}>
-        📖 Liturgia Diaria
+        📖 Cristo en tu día
       </h1>
       <p style={{ 
         textAlign: 'center', 
