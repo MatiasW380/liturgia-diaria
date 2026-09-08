@@ -1,16 +1,11 @@
 // pages/santo.js
 import Layout from '../components/Layout';
 import { useEffect, useState } from 'react';
-async function obtenerDatosLiturgicos() {
-  const res = await fetch('/api/lecturas');
-  if (!res.ok) throw new Error('Error al obtener lecturas');
-  const datos = await res.json();
-  return {
-    santo: datos.celebracion,
-    celebracion: '',
-    color: '',
-    fecha: datos.fecha,
-  };
+
+async function obtenerSantos() {
+  const res = await fetch('/api/santo');
+  if (!res.ok) throw new Error('Error al obtener el santo del día');
+  return res.json();
 }
 
 export default function Santo() {
@@ -21,11 +16,11 @@ export default function Santo() {
   useEffect(() => {
     async function cargarDatos() {
       try {
-        const datosLiturgicos = await obtenerDatosLiturgicos();
-        setDatos(datosLiturgicos);
+        const resultado = await obtenerSantos();
+        setDatos(resultado);
         setCargando(false);
       } catch (err) {
-        console.error('Error al cargar santo:', err);
+        console.error('Error al cargar el santo del día:', err);
         setError(true);
         setCargando(false);
       }
@@ -35,89 +30,59 @@ export default function Santo() {
 
   return (
     <Layout>
-      <div className="card">
-        <h2 className="card-title" style={{ color: '#8e44ad', borderBottomColor: '#8e44ad' }}>
-          ⛪ Santo del Día
-        </h2>
-        
+      <div className="card card-santo">
+        <h2 className="card-title">⛪ Santo del Día</h2>
+
         {cargando && (
           <div style={{ textAlign: 'center', padding: '40px 20px' }}>
-            <p style={{ fontSize: '18px', color: '#666' }}>⏳ Cargando el santo de hoy...</p>
+            <p style={{ fontSize: '18px', color: '#666' }}>⏳ Cargando el santoral de hoy...</p>
           </div>
         )}
 
-        {error && (
-          <div style={{ 
-            backgroundColor: '#f8d7da', 
-            padding: '20px', 
+        {(error || (datos && datos.error)) && (
+          <div style={{
+            backgroundColor: '#f8d7da',
+            padding: '20px',
             borderRadius: '8px',
             borderLeft: '4px solid #dc3545'
           }}>
             <p style={{ margin: 0, color: '#721c24' }}>
-              ⚠️ No se pudo cargar el santo del día. Por favor, intentá más tarde.
+              ⚠️ No se pudo cargar el santoral. Por favor, intentá más tarde.
             </p>
           </div>
         )}
 
-        {datos && !cargando && (
-          <>
-            <div style={{ 
-              backgroundColor: '#f8f9fa', 
-              padding: '20px', 
-              borderRadius: '8px',
-              marginBottom: '20px',
-              textAlign: 'center'
-            }}>
-              <h3 style={{ color: '#8e44ad', margin: 0, fontSize: 'clamp(1.2rem, 3vw, 1.8rem)' }}>
-                {datos.santo}
-              </h3>
-              <p style={{ color: '#666', margin: '8px 0 0 0', fontSize: '14px' }}>
-                📅 {new Date(datos.fecha).toLocaleDateString('es-ES', { 
-                  year: 'numeric', 
-                  month: 'long', 
-                  day: 'numeric' 
-                })}
-              </p>
-            </div>
-
-            {datos.celebracion && (
-              <div style={{
-                padding: '15px',
-                backgroundColor: '#f0e6ff',
-                borderRadius: '8px',
-                marginBottom: '20px',
-                borderLeft: '4px solid #8e44ad'
-              }}>
-                <h4 style={{ margin: '0 0 5px 0', color: '#6c3483', fontSize: '14px' }}>Celebración</h4>
-                <p style={{ margin: 0 }}>{datos.celebracion}</p>
-              </div>
-            )}
-
-            <div style={{ lineHeight: '1.8' }}>
-              <p>
-                El santoral de hoy nos invita a recordar la vida y obra de los santos que la Iglesia celebra en esta fecha.
-                Ellos son modelos de fe y ejemplos de vida cristiana que nos inspiran en nuestro caminar diario.
-              </p>
-              <p style={{ marginTop: '15px' }}>
-                Te invitamos a conocer más sobre la vida de estos santos a través de las fuentes oficiales de la Iglesia.
-              </p>
-            </div>
-
-            {datos.color && (
-              <div style={{
-                marginTop: '25px',
-                padding: '12px',
-                backgroundColor: '#f8f9fa',
-                borderRadius: '8px',
-                textAlign: 'center',
-                fontSize: '14px',
-                color: '#666'
-              }}>
-                🎨 Color litúrgico: <strong>{datos.color}</strong>
-              </div>
-            )}
-          </>
+        {datos && !cargando && !datos.error && datos.santos.length === 0 && (
+          <p style={{ color: '#666' }}>No hay información del santoral para hoy.</p>
         )}
+
+        {datos && !cargando && datos.santos.map((santo, i) => (
+          <div key={i} style={{
+            marginBottom: '25px',
+            paddingBottom: '25px',
+            borderBottom: i < datos.santos.length - 1 ? '1px solid #eee' : 'none',
+          }}>
+            <h3 style={{ color: '#8e44ad', marginBottom: '10px' }}>{santo.titulo}</h3>
+            {santo.imagen && (
+              <img
+                src={santo.imagen}
+                alt={santo.titulo}
+                style={{ maxWidth: '100%', borderRadius: '8px', marginBottom: '15px' }}
+              />
+            )}
+            <p style={{ whiteSpace: 'pre-line', lineHeight: '1.8' }}>{santo.biografia}</p>
+            {santo.link && (
+              <a
+                href={santo.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ fontSize: '13px', color: '#8e44ad' }}
+              >
+                Leer más en ACI Prensa →
+              </a>
+            )}
+          </div>
+        ))}
       </div>
     </Layout>
   );
