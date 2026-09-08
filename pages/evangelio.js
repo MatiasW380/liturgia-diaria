@@ -1,7 +1,7 @@
 // pages/evangelio.js
 import Layout from '../components/Layout';
 import { useEffect, useState } from 'react';
-import { obtenerDatosLiturgicos } from '../lib/liturgiaApi';
+import { obtenerDatosLiturgicos } from '../lib/evangelioApi';
 
 export default function Evangelio() {
   const [datos, setDatos] = useState(null);
@@ -55,9 +55,12 @@ export default function Evangelio() {
               borderRadius: '8px',
               marginBottom: '20px'
             }}>
-              {datos.cita && (
-                <p style={{ fontStyle: 'italic', color: '#555', margin: 0 }}>
-                  "{datos.cita}"
+              <p style={{ fontStyle: 'italic', color: '#555', margin: 0 }}>
+                "{datos.cita}"
+              </p>
+              {datos.traduccion && (
+                <p style={{ fontSize: '12px', color: '#999', marginTop: '5px' }}>
+                  Traducción: {datos.traduccion}
                 </p>
               )}
               <p style={{ fontSize: '14px', color: '#888', marginTop: '8px' }}>
