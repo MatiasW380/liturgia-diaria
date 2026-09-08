@@ -1,7 +1,17 @@
 // pages/santo.js
 import Layout from '../components/Layout';
 import { useEffect, useState } from 'react';
-import { obtenerDatosLiturgicos } from '../lib/evangelioApi';
+async function obtenerDatosLiturgicos() {
+  const res = await fetch('/api/lecturas');
+  if (!res.ok) throw new Error('Error al obtener lecturas');
+  const datos = await res.json();
+  return {
+    santo: datos.celebracion,
+    celebracion: '',
+    color: '',
+    fecha: datos.fecha,
+  };
+}
 
 export default function Santo() {
   const [datos, setDatos] = useState(null);

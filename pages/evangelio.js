@@ -1,7 +1,19 @@
 // pages/evangelio.js
 import Layout from '../components/Layout';
 import { useEffect, useState } from 'react';
-import { obtenerDatosLiturgicos } from '../lib/evangelioApi';
+async function obtenerDatosLiturgicos() {
+  const res = await fetch('/api/lecturas');
+  if (!res.ok) throw new Error('Error al obtener lecturas');
+  const datos = await res.json();
+  return {
+    evangelio: datos.evangelio,
+    cita: datos.citaEvangelio,
+    traduccion: '',
+    fecha: datos.fecha,
+    celebracion: datos.celebracion,
+    color: '',
+  };
+}
 
 export default function Evangelio() {
   const [datos, setDatos] = useState(null);
