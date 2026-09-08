@@ -8,6 +8,7 @@ async function obtenerDatosLiturgicos() {
   return {
     evangelio: datos.evangelio,
     cita: datos.citaEvangelio,
+    titulo: datos.tituloEvangelio,
     traduccion: '',
     fecha: datos.fecha,
     celebracion: datos.celebracion,
@@ -105,7 +106,13 @@ export default function Evangelio() {
             </div>
 
             <div style={{ lineHeight: '1.8' }}>
+              {datos.titulo && (
+                <p style={{ fontWeight: 'bold', marginBottom: '15px' }}>{datos.titulo}</p>
+              )}
               <p style={{ whiteSpace: 'pre-line' }}>{datos.evangelio}</p>
+              <p style={{ fontWeight: 'bold', marginTop: '20px', textAlign: 'right' }}>
+                Palabra de Dios.
+              </p>
             </div>
           </>
         )}
