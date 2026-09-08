@@ -54,35 +54,25 @@ export default function Reflexion() {
 
         {datos && !cargando && !datos.error && (
           <>
-            {datos.seccion && (
-              <p style={{ fontSize: '13px', color: '#999', textTransform: 'uppercase', marginBottom: '4px' }}>
-                {datos.seccion}
-              </p>
-            )}
-
-            <h3 style={{ color: '#c0392b', marginTop: 0, marginBottom: '10px' }}>{datos.titulo}</h3>
-
-            {datos.descripcion && (
-              <p style={{ fontStyle: 'italic', color: '#555', marginBottom: '10px' }}>
-                {datos.descripcion}
-              </p>
-            )}
-
-            {datos.autor && (
-              <p style={{ fontSize: '13px', color: '#888', marginBottom: '20px' }}>{datos.autor}</p>
-            )}
-
-            {datos.imagen && (
-              <img
-                src={datos.imagen}
-                alt={datos.titulo}
-                style={{ maxWidth: '100%', borderRadius: '8px', marginBottom: '20px' }}
-              />
-            )}
-
             <div style={{ lineHeight: '1.8' }}>
               <p style={{ whiteSpace: 'pre-line' }}>{datos.texto}</p>
             </div>
+
+            {datos.papa && (
+              <p style={{
+                fontWeight: 'bold',
+                textAlign: 'right',
+                marginTop: '20px',
+                color: '#c0392b'
+              }}>
+                {datos.papa}
+                {datos.fuenteCita && (
+                  <span style={{ display: 'block', fontWeight: 'normal', fontSize: '13px', color: '#888' }}>
+                    {datos.fuenteCita}
+                  </span>
+                )}
+              </p>
+            )}
           </>
         )}
       </div>
