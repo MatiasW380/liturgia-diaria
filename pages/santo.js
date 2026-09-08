@@ -71,16 +71,6 @@ export default function Santo() {
               />
             )}
             <p style={{ whiteSpace: 'pre-line', lineHeight: '1.8' }}>{santo.biografia}</p>
-            {santo.link && (
-              <a
-                href={santo.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ fontSize: '13px', color: '#8e44ad' }}
-              >
-                Leer más en ACI Prensa →
-              </a>
-            )}
           </div>
         ))}
       </div>
