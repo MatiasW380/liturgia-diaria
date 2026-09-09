@@ -20,7 +20,7 @@ export default function Layout({ children, mostrarHeader = true }) {
       display: 'flex',
       flexDirection: 'column'
     }}>
-      {/* HEADER CONDICIONAL - Solo se muestra si mostrarHeader es true */}
+      {/* HEADER CONDICIONAL - SOLO SE MUESTRA SI mostrarHeader ES true */}
       {mostrarHeader && (
         <header style={{
           backgroundColor: '#14171c',
