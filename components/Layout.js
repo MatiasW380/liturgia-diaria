@@ -1,106 +1,145 @@
+// components/Layout.js
 import Link from 'next/link';
+import { useState } from 'react';
 
-export default function Layout({ children }) {
-  const opciones = [
-    { icono: '📖', nombre: 'Lecturas de hoy', ruta: '/evangelio' },
-    { icono: '⛪', nombre: 'Santo del día', ruta: '/santo' },
+export default function Layout({ children, mostrarHeader = true }) {
+  const [menuAbierto, setMenuAbierto] = useState(false);
+
+  const opcionesMenu = [
+    { icono: '📖', nombre: 'Evangelio', ruta: '/evangelio' },
+    { icono: '⛪', nombre: 'Santo', ruta: '/santo' },
     { icono: '✝️', nombre: 'Reflexión', ruta: '/reflexion' },
-    { icono: '🕯️', nombre: 'Liturgia de las Horas', ruta: '/liturgia-horas' },
+    { icono: '🕯️', nombre: 'Liturgia', ruta: '/liturgia-horas' },
   ];
 
   return (
-    <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 15px' }}>
-      {/* Encabezado */}
-      <header style={{
-        backgroundColor: '#1b1f26',
-        border: '1px solid rgba(232, 227, 216, 0.10)',
-        color: '#e8e3d8',
-        padding: '14px 15px',
-        borderRadius: '10px',
-        marginTop: '15px',
-      }}>
-        <Link href="/" style={{ textDecoration: 'none', color: '#e8e3d8' }}>
-          <h1 style={{
-            fontFamily: "'Lora', Georgia, serif",
-            fontWeight: 600,
-            fontSize: 'clamp(1.1rem, 4vw, 1.6rem)',
-            margin: 0,
-            textAlign: 'center',
-            cursor: 'pointer'
-          }}>
-            Cristo en tu día
-          </h1>
-        </Link>
-
-        {/* Accesos, siempre visibles, sin menú oculto */}
-        <nav className="nav-links" style={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          justifyContent: 'center',
-          gap: '8px',
-          marginTop: '12px',
-          paddingTop: '12px',
-          borderTop: '1px solid rgba(232, 227, 216, 0.10)'
+    <div style={{ 
+      maxWidth: '1200px', 
+      margin: '0 auto', 
+      padding: '0 20px 20px 20px',
+      minHeight: '100vh',
+      display: 'flex',
+      flexDirection: 'column'
+    }}>
+      {/* HEADER CONDICIONAL - Solo se muestra si mostrarHeader es true */}
+      {mostrarHeader && (
+        <header style={{
+          backgroundColor: '#14171c',
+          borderBottom: '1px solid rgba(201, 164, 76, 0.15)',
+          padding: '12px 0',
+          marginBottom: '20px',
+          position: 'sticky',
+          top: 0,
+          zIndex: 100
         }}>
-          {opciones.map((opcion) => (
-            <Link key={opcion.ruta} href={opcion.ruta} style={{ textDecoration: 'none' }}>
-              <div className="nav-item" style={{
-                padding: '8px 14px',
-                backgroundColor: 'rgba(232, 227, 216, 0.04)',
-                border: '1px solid rgba(232, 227, 216, 0.10)',
-                borderRadius: '20px',
-                cursor: 'pointer',
-                transition: 'background-color 0.2s, border-color 0.2s',
-                touchAction: 'manipulation',
-                fontSize: '0.85rem',
-                whiteSpace: 'nowrap',
-                fontFamily: "'Inter', sans-serif",
-                color: '#e8e3d8'
+          <div style={{ 
+            display: 'flex', 
+            justifyContent: 'space-between', 
+            alignItems: 'center',
+          }}>
+            <Link href="/" style={{ textDecoration: 'none' }}>
+              <span style={{ 
+                fontFamily: "'Lora', Georgia, serif", 
+                fontSize: 'clamp(1.1rem, 2vw, 1.4rem)',
+                fontWeight: 600,
+                color: '#c9a44c',
+                letterSpacing: '0.02em'
               }}>
-                <span style={{ marginRight: '6px' }}>{opcion.icono}</span>{opcion.nombre}
-              </div>
+                ✠ Cristo en tu día
+              </span>
             </Link>
-          ))}
-        </nav>
-      </header>
+            
+            <button
+              onClick={() => setMenuAbierto(!menuAbierto)}
+              style={{
+                background: 'none',
+                border: 'none',
+                color: '#e8e3d8',
+                fontSize: '1.5rem',
+                cursor: 'pointer',
+                padding: '5px 10px',
+                touchAction: 'manipulation',
+                display: 'block'
+              }}
+              aria-label="Menú"
+            >
+              ☰
+            </button>
+          </div>
 
-      {/* Contenido principal */}
-      <main style={{ marginTop: '20px', paddingBottom: '20px' }}>
+          <nav style={{
+            display: menuAbierto ? 'block' : 'none',
+            marginTop: '12px',
+            paddingTop: '12px',
+            borderTop: '1px solid rgba(232, 227, 216, 0.08)'
+          }}>
+            {opcionesMenu.map((opcion) => (
+              <Link key={opcion.ruta} href={opcion.ruta}>
+                <div style={{
+                  padding: '10px 12px',
+                  margin: '4px 0',
+                  backgroundColor: 'rgba(255,255,255,0.04)',
+                  borderRadius: '8px',
+                  cursor: 'pointer',
+                  transition: 'background-color 0.2s',
+                  touchAction: 'manipulation',
+                  fontSize: 'clamp(0.9rem, 1.2vw, 1rem)',
+                  color: '#e8e3d8',
+                  fontFamily: "'Inter', Arial, sans-serif"
+                }}>
+                  {opcion.icono} {opcion.nombre}
+                </div>
+              </Link>
+            ))}
+          </nav>
+
+          <style jsx>{`
+            @media (min-width: 768px) {
+              button {
+                display: none !important;
+              }
+              nav {
+                display: flex !important;
+                gap: 8px !important;
+                margin-top: 10px !important;
+                padding-top: 10px !important;
+                border-top: 1px solid rgba(255,255,255,0.08) !important;
+              }
+              nav div {
+                flex: 1;
+                text-align: center;
+                padding: 8px 5px !important;
+                margin: 0 !important;
+              }
+              @media (hover: hover) {
+                nav div:hover {
+                  background-color: rgba(255,255,255,0.1) !important;
+                }
+              }
+            }
+          `}</style>
+        </header>
+      )}
+
+      {/* CONTENIDO PRINCIPAL */}
+      <main style={{ flex: 1, paddingTop: mostrarHeader ? '0' : '20px' }}>
         {children}
       </main>
 
-      {/* Pie de página */}
+      {/* FOOTER (siempre visible) */}
       <footer style={{
         textAlign: 'center',
-        marginTop: '40px',
+        marginTop: '50px',
         padding: '20px 0',
-        borderTop: '1px solid rgba(232, 227, 216, 0.10)',
-        color: '#6b7178',
-        fontSize: 'clamp(0.7rem, 1.8vw, 0.85rem)'
+        borderTop: '1px solid rgba(201, 164, 76, 0.15)',
+        color: '#9aa0a8',
+        fontSize: 'clamp(0.7rem, 1.2vw, 0.8rem)',
+        fontFamily: "'Inter', Arial, sans-serif"
       }}>
         <p style={{ margin: '3px 0' }}>
-          {new Date().toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}
+          ✠ Cristo en tu día — Uso personal
         </p>
       </footer>
-
-      <style jsx>{`
-        @media (min-width: 768px) {
-          header h1 {
-            text-align: left !important;
-          }
-        }
-        @media (hover: hover) {
-          :global(.nav-item):hover {
-            background-color: rgba(201, 164, 76, 0.10) !important;
-            border-color: rgba(201, 164, 76, 0.35) !important;
-          }
-        }
-        @media (hover: none) {
-          :global(.nav-item):active {
-            background-color: rgba(201, 164, 76, 0.15) !important;
-          }
-        }
-      `}</style>
     </div>
   );
 }
