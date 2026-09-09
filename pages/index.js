@@ -28,7 +28,7 @@ export default function Home() {
   ];
 
   return (
-    <Layout>
+    <Layout mostrarHeader={false}>
       {/* HERO - Título, subtítulo, fecha y botones */}
       <div style={{
         textAlign: 'center',
@@ -80,7 +80,7 @@ export default function Home() {
           <span style={{ color: '#c9a44c' }}>✦</span>
         </div>
 
-        {/* BOTONES DE NAVEGACIÓN - VERSIÓN CORREGIDA */}
+        {/* BOTONES DE NAVEGACIÓN */}
         <div className="menu-grid" style={{
           display: 'grid',
           gridTemplateColumns: '1fr',
@@ -128,7 +128,7 @@ export default function Home() {
         </div>
       </div>
 
-      {/* SECCIÓN DE NOTICIAS (sin cambios) */}
+      {/* SECCIÓN DE NOTICIAS */}
       <div>
         <div style={{
           display: 'flex',
