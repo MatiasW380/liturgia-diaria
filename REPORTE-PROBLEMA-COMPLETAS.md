@@ -170,13 +170,26 @@ export async function obtenerHora(hora) {
 5. **Eliminar el cacheo de respuestas de error** en el endpoint (se descubrió que `Cache-Control: s-maxage=3600` estaba guardando la primera respuesta de error por 1 hora, haciendo que pareciera un fallo persistente cuando en realidad no se estaba reintentando nada) — se corrigió esto, pero el fallo real **persiste** incluso con reintentos genuinos.
 6. Se confirmó que **Laudes y Vísperas funcionan perfectamente** con código idéntico salvo el nombre de la hora y la URL.
 
-## 5. Hipótesis no descartadas
+## 5. Confirmado con los logs de Vercel
 
-- Posible **bloqueo o rate-limiting del lado de liturgiadelashoras.info** específico para esa URL o basado en el tamaño/tiempo de respuesta, que no se manifiesta igual desde herramientas de verificación externas que desde las IPs de Vercel.
-- Posible **error de parseo silencioso** dentro de `extraerHora` o `cheerio.load` específico a la estructura HTML de esa página en particular (por ejemplo, algún carácter o tag mal formado en esa página que rompe el parser), no reproducido aún con certeza porque no hay acceso directo a los logs de runtime de Vercel para ver el `error.message` exacto guardado por `console.error`.
-- No se pudo revisar el **log real de Vercel** (Runtime Logs del proyecto en el dashboard de Vercel) para ver el mensaje de error exacto — sería el siguiente paso más útil para diagnosticar con certeza.
+Se revisaron los Runtime Logs de Vercel y se confirma la causa exacta:
 
-## 6. Qué sería útil para resolverlo
+```
+❌ Error al obtener completas: Request failed with status code 500
+```
 
-- Acceso a los **Vercel Runtime Logs** del deploy (Project → Logs, filtrando por `/api/horas`) para ver el `error.message` real del `catch`.
-- Alternativamente, reintroducir temporalmente un campo `detalleError: error.message` en la respuesta JSON (se hizo una vez brevemente pero no se llegó a capturar el mensaje real antes de revertirlo).
+Esto se repite en **todos** los pedidos a `/api/horas?hora=completas` registrados, sin excepción. Es decir: **`liturgiadelashoras.info` devuelve un error HTTP 500 real y consistente** para `hoy/rezar-completas.html` cuando se le pide desde los servidores de Vercel — no es un problema de nuestro código, de timeout, ni de caché.
+
+Esto coincide con un dato extraño detectado antes: al pedir esa misma URL manualmente (fuera de Vercel), en vez de un 500 se recibió contenido con fecha vieja (25 de mayo de 2024) en lugar del día actual. La hipótesis más probable es que **el generador de esa página específica (Completas del día de "hoy") esté roto del lado de `liturgiadelashoras.info`** para fechas actuales, tirando 500 en el momento real y dejando solo copias cacheadas antiguas dando vueltas por fuera.
+
+## 6. Hipótesis descartadas
+
+- ~~Timeout de la función serverless de Vercel~~ — se amplió a 30s sin cambio.
+- ~~Caché de errores pegada~~ — se corrigió (`Cache-Control: no-store` en errores) y el 500 real sigue ocurriendo en cada pedido nuevo.
+- ~~Bug en el parseo con cheerio~~ — descartado, el fetch ni siquiera llega a completarse (falla en el `axios.get`, antes de intentar parsear nada).
+
+## 7. Qué sería útil para resolverlo
+
+- **Confirmar si el problema es exclusivo de `hoy/rezar-completas.html`**, o si `ayer/rezar-completas.html` y `manana/rezar-completas.html` también fallan (ayudaría a acotar si es un bug de fecha específico del generador de esa página en el sitio de origen).
+- Si se confirma que es un bug del lado de `liturgiadelashoras.info`, la solución no está de nuestro lado: habría que decidir entre (a) esperar a que ellos lo arreglen y mientras tanto mostrar un mensaje de error claro, o (b) buscar una fuente alternativa solo para Completas.
+
