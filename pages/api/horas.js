@@ -4,6 +4,14 @@
 
 import { obtenerHora } from '../../lib/liturgiaHorasApi';
 
+// La página de Completas es más larga que Laudes/Vísperas (trae varias
+// antífonas marianas al final) y puede tardar más en generarse del lado
+// de la fuente. Ampliamos el límite de esta función serverless (por
+// defecto 10s en el plan gratuito de Vercel) para darle margen.
+export const config = {
+  maxDuration: 30,
+};
+
 export default async function handler(req, res) {
   const { hora } = req.query;
   if (!['laudes', 'visperas', 'completas'].includes(hora)) {
