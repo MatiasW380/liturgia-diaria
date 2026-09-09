@@ -1,22 +1,34 @@
 // pages/completas.js
 import Layout from '../components/Layout';
 import { useEffect, useState } from 'react';
-import { obtenerCompletas } from '../lib/liturgiaHoras';
 
 export default function Completas() {
   const [datos, setDatos] = useState(null);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
-    const fecha = new Date();
-    const completasData = obtenerCompletas(fecha);
-    setDatos(completasData);
+    fetch('/api/horas?hora=completas')
+      .then((res) => res.json())
+      .then((data) => setDatos(data))
+      .catch(() => setError(true));
   }, []);
+
+  if (error || (datos && datos.error)) {
+    return (
+      <Layout>
+        <div className="card card-completas">
+          <h2 className="card-title">🌙 Completas</h2>
+          <p style={{ color: '#e8e3d8' }}>⚠️ No se pudo cargar Completas. Por favor, intentá más tarde.</p>
+        </div>
+      </Layout>
+    );
+  }
 
   if (!datos) {
     return (
       <Layout>
         <div style={{ textAlign: 'center', padding: '40px 20px' }}>
-          <p>Cargando Completas...</p>
+          <p style={{ color: '#9aa0a8' }}>⏳ Cargando Completas...</p>
         </div>
       </Layout>
     );
@@ -25,36 +37,27 @@ export default function Completas() {
   return (
     <Layout>
       <div className="card card-completas">
-        <h2 className="card-title">{datos.titulo}</h2>
-        
-        <div style={{ textAlign: 'center', color: '#9aa0a8', marginBottom: '20px' }}>
-          <p style={{ margin: 0 }}>📅 {datos.fecha}</p>
-        </div>
+        <h2 className="card-title">🌙 {datos.titulo}</h2>
 
-        <div style={{ backgroundColor: '#21262e', padding: '20px', borderRadius: '8px', marginBottom: '15px' }}>
-          <h4 style={{ marginTop: 0, color: '#c9a44c', fontFamily: "'Lora', Georgia, serif" }}>Examen de Conciencia</h4>
-          <p style={{ fontStyle: 'italic', whiteSpace: 'pre-line', margin: 0 }}>{datos.examen}</p>
-        </div>
+        {datos.celebracion && (
+          <p style={{ textAlign: 'center', color: '#9aa0a8', marginBottom: '20px' }}>
+            {datos.celebracion}
+          </p>
+        )}
 
-        <div style={{ backgroundColor: '#21262e', padding: '20px', borderRadius: '8px', marginBottom: '15px' }}>
-          <h4 style={{ marginTop: 0, color: '#c9a44c', fontFamily: "'Lora', Georgia, serif" }}>Himno</h4>
-          <p style={{ fontStyle: 'italic', whiteSpace: 'pre-line', margin: 0 }}>{datos.himno}</p>
-        </div>
-
-        <div style={{ backgroundColor: '#21262e', padding: '20px', borderRadius: '8px', marginBottom: '15px' }}>
-          <h4 style={{ marginTop: 0, color: '#c9a44c', fontFamily: "'Lora', Georgia, serif" }}>Salmodia</h4>
-          <p style={{ whiteSpace: 'pre-line', margin: 0 }}>{datos.salmodia}</p>
-        </div>
-
-        <div style={{ backgroundColor: '#21262e', padding: '20px', borderRadius: '8px', marginBottom: '15px' }}>
-          <h4 style={{ marginTop: 0, color: '#c9a44c', fontFamily: "'Lora', Georgia, serif" }}>Cánticos</h4>
-          <p style={{ fontStyle: 'italic', whiteSpace: 'pre-line', margin: 0 }}>{datos.canticos}</p>
-        </div>
-
-        <div style={{ backgroundColor: '#21262e', padding: '20px', borderRadius: '8px' }}>
-          <h4 style={{ marginTop: 0, color: '#c9a44c', fontFamily: "'Lora', Georgia, serif" }}>Oración Final</h4>
-          <p style={{ whiteSpace: 'pre-line', margin: 0 }}>{datos.oracion}</p>
-        </div>
+        {datos.secciones.map((seccion, i) => (
+          <div key={i} style={{
+            backgroundColor: '#21262e',
+            padding: '20px',
+            borderRadius: '8px',
+            marginBottom: '15px'
+          }}>
+            <h4 style={{ marginTop: 0, color: '#c9a44c', fontFamily: "'Lora', Georgia, serif" }}>
+              {seccion.nombre}
+            </h4>
+            <p style={{ whiteSpace: 'pre-line', margin: 0 }}>{seccion.texto}</p>
+          </div>
+        ))}
       </div>
     </Layout>
   );
