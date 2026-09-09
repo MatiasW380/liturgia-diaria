@@ -1,49 +1,29 @@
 import Layout from '../components/Layout';
-import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
 export default function Home() {
-  const opciones = [
-    {
-      icono: '📖',
-      nombre: 'Lecturas de Hoy',
-      descripcion: 'La Palabra de Dios para hoy',
-      ruta: '/evangelio',
-    },
-    {
-      icono: '⛪',
-      nombre: 'Santo del Día',
-      descripcion: 'Conoce al santo que celebramos hoy',
-      ruta: '/santo',
-    },
-    {
-      icono: '✝️',
-      nombre: 'Reflexión',
-      descripcion: 'Comentario del Papa',
-      ruta: '/reflexion',
-    },
-    {
-      icono: '🕯️',
-      nombre: 'Liturgia de las Horas',
-      descripcion: 'Laudes • Vísperas • Completas',
-      ruta: '/liturgia-horas',
-    },
-  ];
+  const [noticias, setNoticias] = useState([]);
+  const [cargando, setCargando] = useState(true);
+
+  useEffect(() => {
+    fetch('/api/noticias')
+      .then((res) => res.json())
+      .then((data) => {
+        setNoticias(data.noticias || []);
+        setCargando(false);
+      })
+      .catch(() => {
+        setNoticias([]);
+        setCargando(false);
+      });
+  }, []);
 
   return (
     <Layout>
-      <h1 style={{
-        fontFamily: "'Lora', Georgia, serif",
-        textAlign: 'center',
-        color: '#e8e3d8',
-        marginBottom: '5px',
-        fontSize: 'clamp(1.5rem, 5vw, 2.5rem)'
-      }}>
-        Cristo en tu día
-      </h1>
       <p style={{
         textAlign: 'center',
         color: '#9aa0a8',
-        marginBottom: '30px',
+        marginBottom: '20px',
         fontSize: 'clamp(0.9rem, 2.5vw, 1.1rem)'
       }}>
         {new Date().toLocaleDateString('es-ES', {
@@ -54,71 +34,98 @@ export default function Home() {
         })}
       </p>
 
-      <div style={{
-        display: 'grid',
-        gap: '1px',
-        gridTemplateColumns: '1fr',
-        backgroundColor: 'rgba(232, 227, 216, 0.10)',
-        border: '1px solid rgba(232, 227, 216, 0.10)',
-        borderRadius: '10px',
-        overflow: 'hidden'
+      <h2 style={{
+        fontFamily: "'Lora', Georgia, serif",
+        fontSize: '1.1rem',
+        color: '#c9a44c',
+        fontWeight: 600,
+        marginBottom: '12px'
       }}>
-        {opciones.map((opcion) => (
-          <Link key={opcion.ruta} href={opcion.ruta}>
-            <div style={{
-              backgroundColor: '#1b1f26',
-              padding: '18px 20px',
-              cursor: 'pointer',
-              transition: 'background-color 0.2s',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '18px',
-              minHeight: '68px',
-              touchAction: 'manipulation'
-            }}>
-              <span style={{ fontSize: 'clamp(1.5rem, 5vw, 1.9rem)', flexShrink: 0 }}>{opcion.icono}</span>
-              <div>
-                <h3 style={{
-                  fontFamily: "'Lora', Georgia, serif",
-                  margin: 0,
-                  color: '#e8e3d8',
-                  fontSize: 'clamp(1rem, 3vw, 1.2rem)',
-                  fontWeight: 600
-                }}>
-                  {opcion.nombre}
-                </h3>
+        Noticias del Vaticano
+      </h2>
+
+      {cargando && (
+        <p style={{ color: '#9aa0a8', fontSize: '0.9rem' }}>⏳ Cargando noticias...</p>
+      )}
+
+      {!cargando && noticias.length > 0 && (
+        <div className="news-grid" style={{
+          display: 'grid',
+          gridTemplateColumns: '1fr',
+          gap: '12px'
+        }}>
+          {noticias.map((noticia, i) => (
+            <a
+              key={i}
+              href={noticia.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ textDecoration: 'none' }}
+            >
+              <div className="news-card" style={{
+                backgroundColor: '#1b1f26',
+                border: '1px solid rgba(232, 227, 216, 0.10)',
+                borderRadius: '8px',
+                overflow: 'hidden',
+                height: '100%',
+                transition: 'border-color 0.2s'
+              }}>
+                {noticia.imagen && (
+                  <div style={{
+                    width: '100%',
+                    paddingTop: '56%',
+                    position: 'relative',
+                    backgroundColor: '#14171c'
+                  }}>
+                    <img
+                      src={noticia.imagen}
+                      alt=""
+                      style={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'cover'
+                      }}
+                    />
+                  </div>
+                )}
                 <p style={{
-                  margin: '3px 0 0 0',
-                  color: '#9aa0a8',
-                  fontSize: 'clamp(0.75rem, 2vw, 0.88rem)'
+                  color: '#e8e3d8',
+                  fontSize: '0.85rem',
+                  lineHeight: '1.4',
+                  padding: '10px 12px',
+                  margin: 0
                 }}>
-                  {opcion.descripcion}
+                  {noticia.titulo}
                 </p>
               </div>
-            </div>
-          </Link>
-        ))}
-      </div>
+            </a>
+          ))}
+        </div>
+      )}
+
+      {!cargando && noticias.length === 0 && (
+        <p style={{ color: '#9aa0a8', fontSize: '0.9rem' }}>
+          No se pudieron cargar las noticias por ahora.
+        </p>
+      )}
 
       <style jsx>{`
-        @media (min-width: 600px) {
-          div {
-            grid-template-columns: 1fr 1fr !important;
-          }
-        }
-        @media (min-width: 1024px) {
-          div {
-            grid-template-columns: 1fr 1fr 1fr 1fr !important;
-          }
-        }
         @media (hover: hover) {
-          div div:hover {
-            background-color: #21262e !important;
+          :global(.news-card):hover {
+            border-color: rgba(201, 164, 76, 0.35) !important;
           }
         }
-        @media (hover: none) {
-          div div:active {
-            background-color: #21262e !important;
+        @media (min-width: 600px) {
+          .news-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+        }
+        @media (min-width: 900px) {
+          .news-grid {
+            grid-template-columns: repeat(4, 1fr) !important;
           }
         }
       `}</style>
