@@ -20,29 +20,72 @@ export default function Home() {
 
   return (
     <Layout>
-      <p style={{
+      {/* Hero */}
+      <div style={{
         textAlign: 'center',
-        color: '#9aa0a8',
-        marginBottom: '20px',
-        fontSize: 'clamp(0.9rem, 2.5vw, 1.1rem)'
+        padding: 'clamp(24px, 6vh, 56px) 0 clamp(16px, 3vh, 32px) 0',
       }}>
-        {new Date().toLocaleDateString('es-ES', {
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric',
-          weekday: 'long'
-        })}
-      </p>
+        <h1 style={{
+          fontFamily: "'Lora', Georgia, serif",
+          fontSize: 'clamp(2rem, 6vw, 3.4rem)',
+          fontWeight: 600,
+          color: '#c9a44c',
+          margin: 0,
+          lineHeight: 1.15,
+          textShadow: '0 0 40px rgba(201, 164, 76, 0.18)'
+        }}>
+          Cristo en tu día
+        </h1>
+        <p style={{
+          fontSize: 'clamp(0.85rem, 1.6vw, 1.05rem)',
+          color: '#9aa0a8',
+          margin: '10px 0 0 0',
+          letterSpacing: '0.03em'
+        }}>
+          Evangelio y Liturgia para tu día a día
+        </p>
+        <div style={{
+          marginTop: '16px',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          gap: '10px',
+          color: '#9aa0a8',
+          fontSize: 'clamp(0.8rem, 1.2vw, 0.95rem)'
+        }}>
+          <span style={{ color: '#c9a44c' }}>✦</span>
+          <span>
+            {new Date().toLocaleDateString('es-ES', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+              weekday: 'long'
+            })}
+          </span>
+          <span style={{ color: '#c9a44c' }}>✦</span>
+        </div>
+      </div>
 
-      <h2 style={{
-        fontFamily: "'Lora', Georgia, serif",
-        fontSize: '1.1rem',
-        color: '#c9a44c',
-        fontWeight: 600,
-        marginBottom: '12px'
+      {/* Noticias */}
+      <div style={{
+        display: 'flex',
+        alignItems: 'center',
+        gap: '10px',
+        marginBottom: '16px',
+        borderBottom: '1px solid rgba(201, 164, 76, 0.25)',
+        paddingBottom: '10px'
       }}>
-        Noticias del Vaticano
-      </h2>
+        <span style={{ color: '#c9a44c', fontSize: '1.1rem' }}>✠</span>
+        <h2 style={{
+          fontFamily: "'Lora', Georgia, serif",
+          fontSize: 'clamp(1.05rem, 2vw, 1.3rem)',
+          color: '#e8e3d8',
+          fontWeight: 500,
+          margin: 0
+        }}>
+          Noticias del Vaticano
+        </h2>
+      </div>
 
       {cargando && (
         <p style={{ color: '#9aa0a8', fontSize: '0.9rem' }}>⏳ Cargando noticias...</p>
@@ -52,7 +95,7 @@ export default function Home() {
         <div className="news-grid" style={{
           display: 'grid',
           gridTemplateColumns: '1fr',
-          gap: '12px'
+          gap: '16px'
         }}>
           {noticias.map((noticia, i) => (
             <a
@@ -65,10 +108,10 @@ export default function Home() {
               <div className="news-card" style={{
                 backgroundColor: '#1b1f26',
                 border: '1px solid rgba(232, 227, 216, 0.10)',
-                borderRadius: '8px',
+                borderRadius: '10px',
                 overflow: 'hidden',
                 height: '100%',
-                transition: 'border-color 0.2s'
+                transition: 'border-color 0.2s, transform 0.15s, box-shadow 0.2s'
               }}>
                 {noticia.imagen && (
                   <div style={{
@@ -95,7 +138,7 @@ export default function Home() {
                   color: '#e8e3d8',
                   fontSize: '0.85rem',
                   lineHeight: '1.4',
-                  padding: '10px 12px',
+                  padding: '12px 14px',
                   margin: 0
                 }}>
                   {noticia.titulo}
@@ -116,6 +159,8 @@ export default function Home() {
         @media (hover: hover) {
           :global(.news-card):hover {
             border-color: rgba(201, 164, 76, 0.35) !important;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
           }
         }
         @media (min-width: 600px) {
