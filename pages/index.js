@@ -19,7 +19,6 @@ export default function Home() {
       });
   }, []);
 
-  // Opciones del menú principal
   const opcionesMenu = [
     { icono: '📖', nombre: 'Lecturas de hoy', ruta: '/evangelio' },
     { icono: '⛪', nombre: 'Santo del día', ruta: '/santo' },
@@ -29,7 +28,6 @@ export default function Home() {
 
   return (
     <Layout mostrarHeader={false}>
-      {/* HERO - Título, subtítulo, fecha y botones */}
       <div style={{
         textAlign: 'center',
         padding: 'clamp(20px, 4vh, 40px) 0',
@@ -80,7 +78,6 @@ export default function Home() {
           <span style={{ color: '#c9a44c' }}>✦</span>
         </div>
 
-        {/* BOTONES DE NAVEGACIÓN */}
         <div className="menu-grid" style={{
           display: 'grid',
           gridTemplateColumns: '1fr',
@@ -128,7 +125,6 @@ export default function Home() {
         </div>
       </div>
 
-      {/* SECCIÓN DE NOTICIAS */}
       <div>
         <div style={{
           display: 'flex',
@@ -220,7 +216,6 @@ export default function Home() {
         )}
       </div>
 
-      {/* ESTILOS RESPONSIVE Y HOVER */}
       <style jsx>{`
         @media (hover: hover) {
           .menu-button:hover {
@@ -235,7 +230,6 @@ export default function Home() {
           }
         }
         
-        /* MÓVIL: 1 columna */
         @media (max-width: 599px) {
           .menu-grid {
             grid-template-columns: 1fr !important;
@@ -248,7 +242,6 @@ export default function Home() {
           }
         }
 
-        /* TABLET Y ESCRITORIO: 4 columnas */
         @media (min-width: 600px) {
           .menu-grid {
             grid-template-columns: repeat(4, 1fr) !important;
@@ -261,7 +254,6 @@ export default function Home() {
           }
         }
 
-        /* NOTICIAS: responsive */
         @media (min-width: 600px) {
           .news-grid {
             grid-template-columns: repeat(2, 1fr) !important;
