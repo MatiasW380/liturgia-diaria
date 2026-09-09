@@ -130,7 +130,7 @@ export default function Evangelio() {
                 {datos.tituloPrimeraLectura && (
                   <p style={{ fontWeight: 'bold', marginBottom: '12px' }}>{datos.tituloPrimeraLectura}</p>
                 )}
-                <p style={{ whiteSpace: 'pre-line' }}>{datos.primeraLectura}</p>
+                <p style={{ whiteSpace: 'pre-line', textAlign: 'justify' }}>{datos.primeraLectura}</p>
                 <p style={{ fontWeight: 'bold', marginTop: '15px', textAlign: 'right' }}>Palabra de Dios.</p>
               </Acordeon>
             )}
@@ -146,7 +146,7 @@ export default function Evangelio() {
                 {datos.tituloSegundaLectura && (
                   <p style={{ fontWeight: 'bold', marginBottom: '12px' }}>{datos.tituloSegundaLectura}</p>
                 )}
-                <p style={{ whiteSpace: 'pre-line' }}>{datos.segundaLectura}</p>
+                <p style={{ whiteSpace: 'pre-line', textAlign: 'justify' }}>{datos.segundaLectura}</p>
                 <p style={{ fontWeight: 'bold', marginTop: '15px', textAlign: 'right' }}>Palabra de Dios.</p>
               </Acordeon>
             )}
@@ -159,7 +159,7 @@ export default function Evangelio() {
                 etiqueta="Salmo Responsorial"
                 cita={datos.citaSalmo}
               >
-                <p style={{ whiteSpace: 'pre-line' }}>{datos.salmo}</p>
+                <p style={{ whiteSpace: 'pre-line', textAlign: 'justify' }}>{datos.salmo}</p>
               </Acordeon>
             )}
 
@@ -173,7 +173,7 @@ export default function Evangelio() {
               {datos.tituloEvangelio && (
                 <p style={{ fontWeight: 'bold', marginBottom: '12px' }}>{datos.tituloEvangelio}</p>
               )}
-              <p style={{ whiteSpace: 'pre-line' }}>{datos.evangelio}</p>
+              <p style={{ whiteSpace: 'pre-line', textAlign: 'justify' }}>{datos.evangelio}</p>
               <p style={{ fontWeight: 'bold', marginTop: '15px', textAlign: 'right' }}>Palabra de Dios.</p>
             </Acordeon>
           </>

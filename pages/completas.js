@@ -55,7 +55,7 @@ export default function Completas() {
             <h4 style={{ marginTop: 0, color: '#c9a44c', fontFamily: "'Lora', Georgia, serif" }}>
               {seccion.nombre}
             </h4>
-            <p style={{ whiteSpace: 'pre-line', margin: 0 }}>{seccion.texto}</p>
+            <p style={{ whiteSpace: 'pre-line', margin: 0, textAlign: 'justify' }}>{seccion.texto}</p>
           </div>
         ))}
       </div>

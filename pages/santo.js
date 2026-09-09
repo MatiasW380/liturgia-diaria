@@ -12,6 +12,7 @@ export default function Santo() {
   const [datos, setDatos] = useState(null);
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState(false);
+  const [expandidos, setExpandidos] = useState({});
 
   useEffect(() => {
     async function cargarDatos() {
@@ -27,6 +28,8 @@ export default function Santo() {
     }
     cargarDatos();
   }, []);
+
+  const toggle = (i) => setExpandidos((prev) => ({ ...prev, [i]: !prev[i] }));
 
   return (
     <Layout>
@@ -70,10 +73,45 @@ export default function Santo() {
                 style={{ maxWidth: '100%', borderRadius: '8px', marginBottom: '15px' }}
               />
             )}
-            <p style={{ whiteSpace: 'pre-line', lineHeight: '1.8' }}>{santo.biografia}</p>
+            <p
+              className={`bio-texto ${expandidos[i] ? 'expandido' : ''}`}
+              style={{ whiteSpace: 'pre-line', lineHeight: '1.8', textAlign: 'justify' }}
+            >
+              {santo.biografia}
+            </p>
+            <button
+              onClick={() => toggle(i)}
+              className="boton-leer-mas"
+              style={{
+                background: 'none',
+                border: 'none',
+                color: '#c9a44c',
+                fontWeight: 600,
+                fontSize: '0.9rem',
+                cursor: 'pointer',
+                padding: '8px 0 0 0',
+                display: 'none',
+              }}
+            >
+              {expandidos[i] ? 'Leer menos ▲' : 'Leer más ▼'}
+            </button>
           </div>
         ))}
       </div>
+
+      <style jsx>{`
+        @media (max-width: 767px) {
+          .bio-texto:not(.expandido) {
+            display: -webkit-box;
+            -webkit-line-clamp: 6;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+          }
+          .boton-leer-mas {
+            display: block !important;
+          }
+        }
+      `}</style>
     </Layout>
   );
 }

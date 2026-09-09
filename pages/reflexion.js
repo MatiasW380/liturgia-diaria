@@ -55,7 +55,7 @@ export default function Reflexion() {
         {datos && !cargando && !datos.error && (
           <>
             <div style={{ lineHeight: '1.8' }}>
-              <p style={{ whiteSpace: 'pre-line' }}>{datos.texto}</p>
+              <p style={{ whiteSpace: 'pre-line', textAlign: 'justify' }}>{datos.texto}</p>
             </div>
 
             {datos.papa && (
