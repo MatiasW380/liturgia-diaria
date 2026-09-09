@@ -20,38 +20,21 @@ export default function Home() {
 
   return (
     <Layout>
-      {/* Hero */}
+      {/* Hero con fecha y adornos (sin título duplicado) */}
       <div style={{
         textAlign: 'center',
-        padding: 'clamp(24px, 6vh, 56px) 0 clamp(16px, 3vh, 32px) 0',
+        padding: 'clamp(16px, 4vh, 40px) 0 clamp(20px, 4vh, 40px) 0',
+        marginBottom: 'clamp(20px, 3vh, 30px)'
       }}>
-        <h1 style={{
-          fontFamily: "'Lora', Georgia, serif",
-          fontSize: 'clamp(2rem, 6vw, 3.4rem)',
-          fontWeight: 600,
-          color: '#c9a44c',
-          margin: 0,
-          lineHeight: 1.15,
-          textShadow: '0 0 40px rgba(201, 164, 76, 0.18)'
-        }}>
-          Cristo en tu día
-        </h1>
-        <p style={{
-          fontSize: 'clamp(0.85rem, 1.6vw, 1.05rem)',
-          color: '#9aa0a8',
-          margin: '10px 0 0 0',
-          letterSpacing: '0.03em'
-        }}>
-          Evangelio y Liturgia para tu día a día
-        </p>
         <div style={{
-          marginTop: '16px',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          gap: '10px',
+          gap: '12px',
           color: '#9aa0a8',
-          fontSize: 'clamp(0.8rem, 1.2vw, 0.95rem)'
+          fontSize: 'clamp(0.9rem, 1.4vw, 1.1rem)',
+          fontFamily: "'Inter', Arial, sans-serif",
+          letterSpacing: '0.02em'
         }}>
           <span style={{ color: '#c9a44c' }}>✦</span>
           <span>
