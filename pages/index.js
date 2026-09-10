@@ -142,7 +142,7 @@ export default function Home() {
             fontWeight: 500,
             margin: 0
           }}>
-            Noticias del Vaticano
+            Noticias de la Iglesia
           </h2>
         </div>
 
