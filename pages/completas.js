@@ -39,6 +39,20 @@ export default function Completas() {
       <div className="card card-completas">
         <h2 className="card-title">🌙 {datos.titulo}</h2>
 
+        {datos.esFallback && (
+          <div style={{
+            backgroundColor: 'rgba(201, 164, 76, 0.10)',
+            border: '1px solid rgba(201, 164, 76, 0.30)',
+            borderRadius: '8px',
+            padding: '12px 16px',
+            marginBottom: '20px',
+            fontSize: '0.85rem',
+            color: '#e8e3d8'
+          }}>
+            ℹ️ No se pudo obtener el texto específico de hoy — mostrando la forma general de Completas.
+          </div>
+        )}
+
         {datos.celebracion && (
           <p style={{ textAlign: 'center', color: '#9aa0a8', marginBottom: '20px' }}>
             {datos.celebracion}
