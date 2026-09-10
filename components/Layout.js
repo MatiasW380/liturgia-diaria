@@ -6,6 +6,7 @@ export default function Layout({ children, mostrarHeader = true }) {
 
   const opcionesMenu = [
     { icono: '📖', nombre: 'Evangelio', ruta: '/evangelio' },
+    { icono: '📕', nombre: 'Misal', ruta: '/misal' },
     { icono: '⛪', nombre: 'Santo', ruta: '/santo' },
     { icono: '✝️', nombre: 'Reflexión', ruta: '/reflexion' },
     { icono: '🕯️', nombre: 'Liturgia', ruta: '/liturgia-horas' },
