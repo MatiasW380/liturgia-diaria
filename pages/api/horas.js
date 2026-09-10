@@ -14,7 +14,7 @@ export const config = {
 
 export default async function handler(req, res) {
   const { hora } = req.query;
-  if (!['laudes', 'visperas', 'completas'].includes(hora)) {
+  if (!['oficio_lectura', 'laudes', 'visperas', 'completas'].includes(hora)) {
     res.status(400).json({ error: 'Parámetro "hora" inválido.' });
     return;
   }
