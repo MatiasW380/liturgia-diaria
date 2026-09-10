@@ -4,6 +4,13 @@ import Link from 'next/link';
 
 export default function LiturgiaHoras() {
   const opciones = [
+    {
+      icono: '📜',
+      nombre: 'Oficio de Lectura',
+      descripcion: 'Lecturas y meditación',
+      ruta: '/oficio-lectura',
+      color: '#c9a44c',
+    },
     { 
       icono: '🌅', 
       nombre: 'Laudes', 
@@ -124,7 +131,7 @@ export default function LiturgiaHoras() {
         }
         @media (min-width: 1024px) {
           div {
-            grid-template-columns: 1fr 1fr 1fr !important;
+            grid-template-columns: 1fr 1fr !important;
             gap: 25px !important;
           }
         }
