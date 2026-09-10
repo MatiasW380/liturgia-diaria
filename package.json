@@ -11,7 +11,7 @@
     "next": "latest",
     "react": "latest",
     "react-dom": "latest",
-    "breviarium": "^1.0.0",
+    "breviarium": "^3.0.16",
     "axios": "^1.6.0",
     "cheerio": "^1.0.0"
   }
