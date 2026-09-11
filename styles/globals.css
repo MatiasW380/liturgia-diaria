@@ -29,6 +29,9 @@ html, body {
 }
 
 body {
+  /* Atmósfera: sutilmente más claro arriba, se oscurece hacia abajo/bordes */
+  background-image: radial-gradient(circle at 50% 0%, #1a1e25 0%, #14171c 60%);
+  background-attachment: fixed;
   font-family: var(--font-sans);
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
@@ -62,6 +65,7 @@ button:focus-visible {
   border-radius: 10px;
   padding: 28px;
   margin-bottom: 25px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
 }
 
 .card-title {
