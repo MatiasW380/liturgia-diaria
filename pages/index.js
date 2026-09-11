@@ -84,7 +84,7 @@ export default function Home() {
           gridTemplateColumns: '1fr',
           gap: '10px',
           marginTop: 'clamp(24px, 4vh, 40px)',
-          maxWidth: '700px',
+          maxWidth: '900px',
           marginLeft: 'auto',
           marginRight: 'auto'
         }}>
@@ -94,17 +94,17 @@ export default function Home() {
                 backgroundColor: '#1c2027',
                 border: '1px solid rgba(232, 227, 216, 0.08)',
                 borderRadius: '10px',
-                padding: '12px 16px',
+                padding: '12px 10px',
                 transition: 'border-color 0.2s, transform 0.15s, box-shadow 0.2s',
                 cursor: 'pointer',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                gap: '12px',
+                gap: '8px',
                 height: '52px'
               }}>
                 <span style={{
-                  fontSize: 'clamp(1.2rem, 1.8vw, 1.4rem)',
+                  fontSize: 'clamp(1.1rem, 1.5vw, 1.3rem)',
                   color: '#c9a44c',
                   flexShrink: 0
                 }}>
@@ -112,10 +112,10 @@ export default function Home() {
                 </span>
                 <span style={{
                   fontFamily: "'Inter', Arial, sans-serif",
-                  fontSize: 'clamp(0.85rem, 1.1vw, 0.95rem)',
+                  fontSize: 'clamp(0.75rem, 0.95vw, 0.9rem)',
                   color: '#e8e3d8',
                   fontWeight: 400,
-                  letterSpacing: '0.02em',
+                  letterSpacing: '0.01em',
                   whiteSpace: 'nowrap'
                 }}>
                   {opcion.nombre}
@@ -245,13 +245,24 @@ export default function Home() {
 
         @media (min-width: 600px) {
           .menu-grid {
-            grid-template-columns: repeat(4, 1fr) !important;
-            gap: 12px !important;
-            max-width: 800px !important;
+            grid-template-columns: repeat(5, 1fr) !important;
+            gap: 8px !important;
+            max-width: 100% !important;
           }
           .menu-button {
             height: 48px !important;
+            padding: 0 8px !important;
+            gap: 6px !important;
+          }
+        }
+        @media (min-width: 900px) {
+          .menu-grid {
+            max-width: 950px !important;
+            gap: 10px !important;
+          }
+          .menu-button {
             padding: 0 12px !important;
+            gap: 8px !important;
           }
         }
 
