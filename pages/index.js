@@ -20,7 +20,7 @@ export default function Home() {
   }, []);
 
   const opcionesMenu = [
-    { icono: '📖', nombre: 'Lecturas de hoy', ruta: '/evangelio' },
+    { icono: '📖', nombre: 'Lecturas', ruta: '/evangelio' },
     { icono: '✝️', nombre: 'Reflexión', ruta: '/reflexion' },
     { icono: '⛪', nombre: 'Santo del día', ruta: '/santo' },
     { icono: '📕', nombre: 'Misal', ruta: '/misal' },
