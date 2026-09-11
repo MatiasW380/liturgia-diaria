@@ -21,8 +21,8 @@ export default function Home() {
 
   const opcionesMenu = [
     { icono: '📖', nombre: 'Lecturas de hoy', ruta: '/evangelio' },
-    { icono: '⛪', nombre: 'Santo del día', ruta: '/santo' },
     { icono: '✝️', nombre: 'Reflexión', ruta: '/reflexion' },
+    { icono: '⛪', nombre: 'Santo del día', ruta: '/santo' },
     { icono: '🕯️', nombre: 'Liturgia de las Horas', ruta: '/liturgia-horas' },
   ];
 
