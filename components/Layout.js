@@ -5,11 +5,11 @@ export default function Layout({ children, mostrarHeader = true }) {
   const [menuAbierto, setMenuAbierto] = useState(false);
 
   const opcionesMenu = [
-    { icono: '📖', nombre: 'Evangelio', ruta: '/evangelio' },
-    { icono: '📕', nombre: 'Misal', ruta: '/misal' },
-    { icono: '⛪', nombre: 'Santo', ruta: '/santo' },
+    { icono: '📖', nombre: 'Lecturas', ruta: '/evangelio' },
     { icono: '✝️', nombre: 'Reflexión', ruta: '/reflexion' },
-    { icono: '🕯️', nombre: 'Liturgia', ruta: '/liturgia-horas' },
+    { icono: '⛪', nombre: 'Santo', ruta: '/santo' },
+    { icono: '📕', nombre: 'Misal', ruta: '/misal' },
+    { icono: '🕯️', nombre: 'Horas', ruta: '/liturgia-horas' },
   ];
 
   return (
