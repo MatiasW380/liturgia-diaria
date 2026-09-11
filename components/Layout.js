@@ -23,9 +23,7 @@ export default function Layout({ children, mostrarHeader = true }) {
     }}>
       {/* HEADER CONDICIONAL - SOLO SE MUESTRA SI mostrarHeader ES true */}
       {mostrarHeader && (
-        <header style={{
-          backgroundColor: '#14171c',
-          borderBottom: '1px solid rgba(201, 164, 76, 0.15)',
+        <header className="app-header" style={{
           padding: '12px 0',
           marginBottom: '20px',
           position: 'sticky',
