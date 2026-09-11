@@ -72,11 +72,7 @@ export default function Misal() {
 
         <Bloque etiqueta="Antífona de entrada" dato={datos.antifonaEntrada} />
         <Bloque etiqueta="Oración colecta" dato={datos.oracionColecta} />
-        <Bloque etiqueta="Primera Lectura" dato={datos.primeraLectura} />
-        <Bloque etiqueta="Segunda Lectura" dato={datos.segundaLectura} />
-        <Bloque etiqueta="Salmo Responsorial" dato={datos.salmo} />
         <Bloque etiqueta="Aclamación al Evangelio" dato={datos.aclamacion} />
-        <Bloque etiqueta="Evangelio" dato={datos.evangelio} />
         <Bloque etiqueta="Oración sobre las ofrendas" dato={datos.oracionOfrendas} />
         <Bloque etiqueta="Antífona de comunión" dato={datos.antifonaComunion} />
         <Bloque etiqueta="Oración después de la comunión" dato={datos.oracionComunion} />
