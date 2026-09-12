@@ -1,15 +1,16 @@
 import Link from 'next/link';
 import { useState } from 'react';
+import { BookOpen, Cross, Church, BookMarked, Flame } from 'lucide-react';
 
 export default function Layout({ children, mostrarHeader = true }) {
   const [menuAbierto, setMenuAbierto] = useState(false);
 
   const opcionesMenu = [
-    { icono: '📖', nombre: 'Lecturas', ruta: '/evangelio' },
-    { icono: '✝️', nombre: 'Reflexión', ruta: '/reflexion' },
-    { icono: '⛪', nombre: 'Santo', ruta: '/santo' },
-    { icono: '📕', nombre: 'Misal', ruta: '/misal' },
-    { icono: '🕯️', nombre: 'Horas', ruta: '/liturgia-horas' },
+    { Icono: BookOpen, nombre: 'Lecturas', ruta: '/evangelio' },
+    { Icono: Cross, nombre: 'Reflexión', ruta: '/reflexion' },
+    { Icono: Church, nombre: 'Santo', ruta: '/santo' },
+    { Icono: BookMarked, nombre: 'Misal', ruta: '/misal' },
+    { Icono: Flame, nombre: 'Horas', ruta: '/liturgia-horas' },
   ];
 
   return (
@@ -83,9 +84,13 @@ export default function Layout({ children, mostrarHeader = true }) {
                   touchAction: 'manipulation',
                   fontSize: 'clamp(0.9rem, 1.2vw, 1rem)',
                   color: '#e8e3d8',
-                  fontFamily: "'Inter', Arial, sans-serif"
+                  fontFamily: "'Inter', Arial, sans-serif",
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '10px'
                 }}>
-                  {opcion.icono} {opcion.nombre}
+                  <opcion.Icono size={18} color="#c9a44c" strokeWidth={1.5} />
+                  {opcion.nombre}
                 </div>
               </Link>
             ))}
