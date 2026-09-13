@@ -1,7 +1,8 @@
 // pages/evangelio.js
 import Layout from '../components/Layout';
 import { useEffect, useState } from 'react';
-import { ChevronDown, BookOpen, Church } from 'lucide-react';
+import { ChevronDown, BookOpen, Church, Share2 } from 'lucide-react';
+import { compartirTexto } from '../lib/compartir';
 
 async function obtenerLecturas() {
   const res = await fetch('/api/lecturas');
@@ -9,7 +10,7 @@ async function obtenerLecturas() {
   return res.json();
 }
 
-function Acordeon({ id, abierto, onToggle, etiqueta, cita, children }) {
+function Acordeon({ id, abierto, onToggle, etiqueta, cita, textoCompartir, children }) {
   return (
     <div style={{
       border: '1px solid rgba(232, 227, 216, 0.12)',
@@ -44,6 +45,27 @@ function Acordeon({ id, abierto, onToggle, etiqueta, cita, children }) {
       </button>
       <div className={`acordeon-content ${abierto ? 'open' : ''}`} style={{ lineHeight: '1.8' }}>
         {children}
+        {textoCompartir && (
+          <button
+            onClick={() => compartirTexto(`${etiqueta}${cita ? ' — ' + cita : ''}`, textoCompartir)}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px',
+              marginTop: '15px',
+              background: 'none',
+              border: '1px solid rgba(201, 164, 76, 0.35)',
+              borderRadius: '20px',
+              padding: '6px 14px',
+              color: '#c9a44c',
+              fontSize: '0.85rem',
+              cursor: 'pointer',
+            }}
+          >
+            <Share2 size={15} strokeWidth={1.5} />
+            Compartir
+          </button>
+        )}
       </div>
     </div>
   );
@@ -127,6 +149,7 @@ export default function Evangelio() {
                 onToggle={toggle}
                 etiqueta="Primera Lectura"
                 cita={datos.citaPrimeraLectura}
+                textoCompartir={datos.primeraLectura}
               >
                 {datos.tituloPrimeraLectura && (
                   <p style={{ fontWeight: 'bold', marginBottom: '12px' }}>{datos.tituloPrimeraLectura}</p>
@@ -143,6 +166,7 @@ export default function Evangelio() {
                 onToggle={toggle}
                 etiqueta="Segunda Lectura"
                 cita={datos.citaSegundaLectura}
+                textoCompartir={datos.segundaLectura}
               >
                 {datos.tituloSegundaLectura && (
                   <p style={{ fontWeight: 'bold', marginBottom: '12px' }}>{datos.tituloSegundaLectura}</p>
@@ -159,6 +183,7 @@ export default function Evangelio() {
                 onToggle={toggle}
                 etiqueta="Salmo Responsorial"
                 cita={datos.citaSalmo}
+                textoCompartir={datos.salmo}
               >
                 <p style={{ whiteSpace: 'pre-line', textAlign: 'justify' }}>{datos.salmo}</p>
               </Acordeon>
@@ -170,6 +195,7 @@ export default function Evangelio() {
               onToggle={toggle}
               etiqueta="Evangelio"
               cita={datos.citaEvangelio}
+              textoCompartir={datos.evangelio}
             >
               {datos.tituloEvangelio && (
                 <p style={{ fontWeight: 'bold', marginBottom: '12px' }}>{datos.tituloEvangelio}</p>
