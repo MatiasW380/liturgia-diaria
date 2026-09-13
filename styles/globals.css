@@ -109,7 +109,29 @@ button:focus-visible {
   background: var(--surface);
 }
 
-/* Responsive */
+/* Acordeón con transición suave (en vez de aparecer/desaparecer de golpe) */
+.acordeon-content {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease-in-out, opacity 0.4s ease, padding 0.4s ease;
+  padding: 0 18px;
+}
+
+.acordeon-content.open {
+  max-height: 3000px;
+  opacity: 1;
+  padding: 18px;
+}
+
+.acordeon-chevron {
+  transition: transform 0.3s ease;
+  display: inline-flex;
+}
+
+.acordeon-chevron.open {
+  transform: rotate(180deg);
+}
 @media (max-width: 600px) {
   .card {
     padding: 18px;

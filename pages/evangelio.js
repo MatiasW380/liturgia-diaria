@@ -1,6 +1,7 @@
 // pages/evangelio.js
 import Layout from '../components/Layout';
 import { useEffect, useState } from 'react';
+import { ChevronDown } from 'lucide-react';
 
 async function obtenerLecturas() {
   const res = await fetch('/api/lecturas');
@@ -37,13 +38,13 @@ function Acordeon({ id, abierto, onToggle, etiqueta, cita, children }) {
           <strong>{etiqueta}</strong>
           {cita && <span style={{ color: '#9aa0a8', marginLeft: '10px', fontSize: '14px' }}>{cita}</span>}
         </span>
-        <span style={{ fontSize: '14px', color: '#c9a44c' }}>{abierto ? '▲' : '▼'}</span>
+        <span className={`acordeon-chevron ${abierto ? 'open' : ''}`}>
+          <ChevronDown size={18} color="#c9a44c" strokeWidth={2} />
+        </span>
       </button>
-      {abierto && (
-        <div style={{ padding: '18px', lineHeight: '1.8' }}>
-          {children}
-        </div>
-      )}
+      <div className={`acordeon-content ${abierto ? 'open' : ''}`} style={{ lineHeight: '1.8' }}>
+        {children}
+      </div>
     </div>
   );
 }
