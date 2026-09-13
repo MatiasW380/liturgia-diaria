@@ -1,7 +1,7 @@
 // pages/evangelio.js
 import Layout from '../components/Layout';
 import { useEffect, useState } from 'react';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, BookOpen, Church } from 'lucide-react';
 
 async function obtenerLecturas() {
   const res = await fetch('/api/lecturas');
@@ -75,7 +75,7 @@ export default function Evangelio() {
   return (
     <Layout>
       <div className="card card-evangelio">
-        <h2 className="card-title">📖 Lecturas del Día</h2>
+        <h2 className="card-title" style={{ display: "flex", alignItems: "center", gap: "10px" }}><BookOpen size={22} color="#c9a44c" strokeWidth={1.5} /> Lecturas del Día</h2>
 
         {cargando && (
           <div style={{ textAlign: 'center', padding: '40px 20px' }}>
@@ -115,7 +115,7 @@ export default function Evangelio() {
                 borderLeft: '3px solid #c9a44c',
                 marginBottom: '20px'
               }}>
-                <h4 style={{ margin: '0 0 8px 0', color: '#c9a44c', fontFamily: "'Lora', Georgia, serif" }}>⛪ Celebración</h4>
+                <h4 style={{ margin: '0 0 8px 0', color: '#c9a44c', fontFamily: "'Lora', Georgia, serif", display: "flex", alignItems: "center", gap: "8px" }}><Church size={16} strokeWidth={1.5} /> Celebración</h4>
                 <p style={{ margin: 0, fontSize: '15px', color: '#e8e3d8' }}>{datos.celebracion}</p>
               </div>
             )}
@@ -168,7 +168,7 @@ export default function Evangelio() {
               id="evangelio"
               abierto={!!abiertos.evangelio}
               onToggle={toggle}
-              etiqueta="📖 Evangelio"
+              etiqueta="Evangelio"
               cita={datos.citaEvangelio}
             >
               {datos.tituloEvangelio && (

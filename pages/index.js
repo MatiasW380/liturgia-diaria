@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import Layout from '../components/Layout';
 import Link from 'next/link';
+import { BookOpen, Cross, Church, BookMarked, Flame } from 'lucide-react';
 
 export default function Home() {
   const [noticias, setNoticias] = useState([]);
@@ -20,11 +21,11 @@ export default function Home() {
   }, []);
 
   const opcionesMenu = [
-    { icono: '📖', nombre: 'Lecturas del Día', ruta: '/evangelio' },
-    { icono: '✝️', nombre: 'Reflexión', ruta: '/reflexion' },
-    { icono: '⛪', nombre: 'Santo del día', ruta: '/santo' },
-    { icono: '📕', nombre: 'Misal', ruta: '/misal' },
-    { icono: '🕯️', nombre: 'Liturgia de las Horas', ruta: '/liturgia-horas' },
+    { Icono: BookOpen, nombre: 'Lecturas del Día', ruta: '/evangelio' },
+    { Icono: Cross, nombre: 'Reflexión', ruta: '/reflexion' },
+    { Icono: Church, nombre: 'Santo del día', ruta: '/santo' },
+    { Icono: BookMarked, nombre: 'Misal', ruta: '/misal' },
+    { Icono: Flame, nombre: 'Liturgia de las Horas', ruta: '/liturgia-horas' },
   ];
 
   return (
@@ -103,13 +104,12 @@ export default function Home() {
                 gap: '8px',
                 height: '52px'
               }}>
-                <span style={{
-                  fontSize: 'clamp(1.1rem, 1.5vw, 1.3rem)',
-                  color: '#c9a44c',
-                  flexShrink: 0
-                }}>
-                  {opcion.icono}
-                </span>
+                <opcion.Icono
+                  size={20}
+                  color="#c9a44c"
+                  strokeWidth={1.5}
+                  style={{ flexShrink: 0 }}
+                />
                 <span style={{
                   fontFamily: "'Inter', Arial, sans-serif",
                   fontSize: 'clamp(0.75rem, 0.95vw, 0.9rem)',

@@ -1,6 +1,7 @@
 // pages/completas.js
 import Layout from '../components/Layout';
 import { useEffect, useState } from 'react';
+import { Moon } from 'lucide-react';
 
 export default function Completas() {
   const [datos, setDatos] = useState(null);
@@ -17,7 +18,7 @@ export default function Completas() {
     return (
       <Layout>
         <div className="card card-completas">
-          <h2 className="card-title">🌙 Completas</h2>
+          <h2 className="card-title" style={{ display: "flex", alignItems: "center", gap: "10px" }}><Moon size={22} color="#c9a44c" strokeWidth={1.5} /> Completas</h2>
           <p style={{ color: '#e8e3d8' }}>⚠️ No se pudo cargar Completas. Por favor, intentá más tarde.</p>
         </div>
       </Layout>
@@ -37,7 +38,7 @@ export default function Completas() {
   return (
     <Layout>
       <div className="card card-completas">
-        <h2 className="card-title">🌙 {datos.titulo}</h2>
+        <h2 className="card-title" style={{ display: "flex", alignItems: "center", gap: "10px" }}><Moon size={22} color="#c9a44c" strokeWidth={1.5} /> {datos.titulo}</h2>
 
         {datos.esFallback && (
           <div style={{

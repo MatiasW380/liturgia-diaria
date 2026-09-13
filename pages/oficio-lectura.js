@@ -1,6 +1,7 @@
 // pages/oficio-lectura.js
 import Layout from '../components/Layout';
 import { useEffect, useState } from 'react';
+import { ScrollText } from 'lucide-react';
 
 export default function OficioLectura() {
   const [datos, setDatos] = useState(null);
@@ -17,7 +18,7 @@ export default function OficioLectura() {
     return (
       <Layout>
         <div className="card card-oficio-lectura">
-          <h2 className="card-title">📜 Oficio de Lectura</h2>
+          <h2 className="card-title" style={{ display: "flex", alignItems: "center", gap: "10px" }}><ScrollText size={22} color="#c9a44c" strokeWidth={1.5} /> Oficio de Lectura</h2>
           <p style={{ color: '#e8e3d8' }}>⚠️ No se pudo cargar el Oficio de Lectura. Por favor, intentá más tarde.</p>
         </div>
       </Layout>
@@ -37,7 +38,7 @@ export default function OficioLectura() {
   return (
     <Layout>
       <div className="card card-oficio-lectura">
-        <h2 className="card-title">📜 {datos.titulo}</h2>
+        <h2 className="card-title" style={{ display: "flex", alignItems: "center", gap: "10px" }}><ScrollText size={22} color="#c9a44c" strokeWidth={1.5} /> {datos.titulo}</h2>
 
         {datos.celebracion && (
           <p style={{ textAlign: 'center', color: '#9aa0a8', marginBottom: '20px' }}>

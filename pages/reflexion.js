@@ -1,6 +1,7 @@
 // pages/reflexion.js
 import Layout from '../components/Layout';
 import { useEffect, useState } from 'react';
+import { Cross } from 'lucide-react';
 
 async function obtenerReflexion() {
   const res = await fetch('/api/reflexion');
@@ -31,7 +32,7 @@ export default function Reflexion() {
   return (
     <Layout>
       <div className="card card-reflexion">
-        <h2 className="card-title">✝️ Reflexión del Día</h2>
+        <h2 className="card-title" style={{ display: "flex", alignItems: "center", gap: "10px" }}><Cross size={22} color="#c9a44c" strokeWidth={1.5} /> Reflexión del Día</h2>
 
         {cargando && (
           <div style={{ textAlign: 'center', padding: '40px 20px' }}>

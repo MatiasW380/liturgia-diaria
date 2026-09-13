@@ -1,6 +1,7 @@
 // pages/misal.js
 import Layout from '../components/Layout';
 import { useEffect, useState } from 'react';
+import { BookMarked } from 'lucide-react';
 
 function Bloque({ etiqueta, dato }) {
   if (!dato || !dato.texto) return null;
@@ -37,7 +38,7 @@ export default function Misal() {
     return (
       <Layout>
         <div className="card card-misal">
-          <h2 className="card-title">📕 Misal del Día</h2>
+          <h2 className="card-title" style={{ display: "flex", alignItems: "center", gap: "10px" }}><BookMarked size={22} color="#c9a44c" strokeWidth={1.5} /> Misal del Día</h2>
           <p style={{ color: '#e8e3d8' }}>⚠️ No se pudo cargar el Misal de hoy. Por favor, intentá más tarde.</p>
         </div>
       </Layout>
@@ -57,7 +58,7 @@ export default function Misal() {
   return (
     <Layout>
       <div className="card card-misal">
-        <h2 className="card-title">📕 Misal del Día</h2>
+        <h2 className="card-title" style={{ display: "flex", alignItems: "center", gap: "10px" }}><BookMarked size={22} color="#c9a44c" strokeWidth={1.5} /> Misal del Día</h2>
 
         {datos.celebracion && (
           <p style={{ textAlign: 'center', color: '#e8e3d8', marginBottom: '4px', fontFamily: "'Lora', Georgia, serif" }}>

@@ -1,6 +1,7 @@
 // pages/santo.js
 import Layout from '../components/Layout';
 import { useEffect, useState } from 'react';
+import { Church } from 'lucide-react';
 
 async function obtenerSantos() {
   const res = await fetch('/api/santo');
@@ -34,7 +35,7 @@ export default function Santo() {
   return (
     <Layout>
       <div className="card card-santo">
-        <h2 className="card-title">⛪ Santo del Día</h2>
+        <h2 className="card-title" style={{ display: "flex", alignItems: "center", gap: "10px" }}><Church size={22} color="#c9a44c" strokeWidth={1.5} /> Santo del Día</h2>
 
         {cargando && (
           <div style={{ textAlign: 'center', padding: '40px 20px' }}>
