@@ -1,32 +1,33 @@
 // pages/liturgia-horas.js
 import Layout from '../components/Layout';
 import Link from 'next/link';
+import { ScrollText, Sunrise, Sunset, Moon, Flame, Clock } from 'lucide-react';
 
 export default function LiturgiaHoras() {
   const opciones = [
     {
-      icono: '📜',
+      Icono: ScrollText,
       nombre: 'Oficio de Lectura',
       descripcion: 'Lecturas y meditación',
       ruta: '/oficio-lectura',
       color: '#c9a44c',
     },
     { 
-      icono: '🌅', 
+      Icono: Sunrise, 
       nombre: 'Laudes', 
       descripcion: 'Oración de la mañana',
       ruta: '/laudes', 
       color: '#c9a44c',
     },
     { 
-      icono: '🌇', 
+      Icono: Sunset, 
       nombre: 'Vísperas', 
       descripcion: 'Oración del atardecer',
       ruta: '/visperas', 
       color: '#c9a44c',
     },
     { 
-      icono: '🌙', 
+      Icono: Moon, 
       nombre: 'Completas', 
       descripcion: 'Oración antes de dormir',
       ruta: '/completas', 
@@ -41,9 +42,14 @@ export default function LiturgiaHoras() {
           color: '#e8e3d8', 
           fontFamily: "'Lora', Georgia, serif",
           fontSize: 'clamp(1.5rem, 5vw, 2.2rem)',
-          marginBottom: '5px'
+          marginBottom: '5px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: '10px'
         }}>
-          🕯️ Liturgia de las Horas
+          <Flame size={28} color="#c9a44c" strokeWidth={1.5} />
+          Liturgia de las Horas
         </h1>
         <p style={{ color: '#9aa0a8', fontSize: 'clamp(0.9rem, 2.5vw, 1rem)' }}>
           {new Date().toLocaleDateString('es-ES', { 
@@ -83,12 +89,12 @@ export default function LiturgiaHoras() {
               minHeight: '80px',
               touchAction: 'manipulation'
             }}>
-              <span style={{ 
-                fontSize: 'clamp(2.5rem, 7vw, 3.5rem)', 
-                flexShrink: 0 
-              }}>
-                {opcion.icono}
-              </span>
+              <opcion.Icono
+                size={40}
+                color={opcion.color}
+                strokeWidth={1.5}
+                style={{ flexShrink: 0 }}
+              />
               <div>
                 <h3 style={{ 
                   margin: 0, 
@@ -120,7 +126,10 @@ export default function LiturgiaHoras() {
         fontSize: 'clamp(0.75rem, 2vw, 0.85rem)',
         color: '#9aa0a8'
       }}>
-        ⏰ Según la tradición de la Iglesia, las horas canónicas se rezan en estos momentos del día
+        <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+          <Clock size={14} color="#9aa0a8" strokeWidth={1.5} />
+          Según la tradición de la Iglesia, las horas canónicas se rezan en estos momentos del día
+        </span>
       </div>
 
       <style jsx>{`
