@@ -140,7 +140,7 @@ export default function Layout({ children, mostrarHeader = true }) {
         fontFamily: "'Inter', Arial, sans-serif"
       }}>
         <p style={{ margin: '3px 0' }}>
-          ✠ Cristo en tu día — 2026
+          ✠ Cristo en tu día
         </p>
       </footer>
     </div>
