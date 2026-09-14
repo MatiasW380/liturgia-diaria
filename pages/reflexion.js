@@ -1,7 +1,8 @@
 // pages/reflexion.js
 import Layout from '../components/Layout';
 import { useEffect, useState } from 'react';
-import { Cross } from 'lucide-react';
+import { Cross, Share2 } from 'lucide-react';
+import { compartirTexto } from '../lib/compartir';
 
 async function obtenerReflexion() {
   const res = await fetch('/api/reflexion');
@@ -74,6 +75,29 @@ export default function Reflexion() {
                 )}
               </p>
             )}
+
+            <button
+              onClick={() => compartirTexto(
+                `Reflexión${datos.papa ? ' — ' + datos.papa : ''}`,
+                datos.texto
+              )}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+                marginTop: '15px',
+                background: 'none',
+                border: '1px solid rgba(201, 164, 76, 0.35)',
+                borderRadius: '20px',
+                padding: '6px 14px',
+                color: '#c9a44c',
+                fontSize: '0.85rem',
+                cursor: 'pointer',
+              }}
+            >
+              <Share2 size={15} strokeWidth={1.5} />
+              Compartir
+            </button>
           </>
         )}
       </div>
