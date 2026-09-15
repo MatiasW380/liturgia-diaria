@@ -132,6 +132,12 @@ button:focus-visible {
 .acordeon-chevron.open {
   transform: rotate(180deg);
 }
+
+/* Tamaño de letra ajustable (se guarda en localStorage) */
+.texto-chico .card { font-size: 0.9rem; }
+.texto-normal .card { font-size: 1rem; }
+.texto-grande .card { font-size: 1.15rem; }
+.texto-xgrande .card { font-size: 1.3rem; }
 @media (max-width: 600px) {
   .card {
     padding: 18px;

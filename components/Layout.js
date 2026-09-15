@@ -1,9 +1,28 @@
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { BookOpen, Cross, Church, BookMarked, Flame } from 'lucide-react';
+
+const TAMANOS = ['texto-chico', 'texto-normal', 'texto-grande', 'texto-xgrande'];
 
 export default function Layout({ children, mostrarHeader = true }) {
   const [menuAbierto, setMenuAbierto] = useState(false);
+  const [tamanoIndice, setTamanoIndice] = useState(1); // texto-normal por defecto
+
+  useEffect(() => {
+    const guardado = localStorage.getItem('tamanoTexto');
+    if (guardado !== null) {
+      const indice = TAMANOS.indexOf(guardado);
+      if (indice !== -1) setTamanoIndice(indice);
+    }
+  }, []);
+
+  const cambiarTamano = (delta) => {
+    setTamanoIndice((actual) => {
+      const nuevo = Math.min(TAMANOS.length - 1, Math.max(0, actual + delta));
+      localStorage.setItem('tamanoTexto', TAMANOS[nuevo]);
+      return nuevo;
+    });
+  };
 
   const opcionesMenu = [
     { Icono: BookOpen, nombre: 'Lecturas', ruta: '/evangelio' },
@@ -14,7 +33,7 @@ export default function Layout({ children, mostrarHeader = true }) {
   ];
 
   return (
-    <div style={{ 
+    <div className={TAMANOS[tamanoIndice]} style={{ 
       maxWidth: '1200px', 
       margin: '0 auto', 
       padding: '0 20px 20px 20px',
@@ -48,22 +67,62 @@ export default function Layout({ children, mostrarHeader = true }) {
               </span>
             </Link>
             
-            <button
-              onClick={() => setMenuAbierto(!menuAbierto)}
-              style={{
-                background: 'none',
-                border: 'none',
-                color: '#e8e3d8',
-                fontSize: '1.5rem',
-                cursor: 'pointer',
-                padding: '5px 10px',
-                touchAction: 'manipulation',
-                display: 'block'
-              }}
-              aria-label="Menú"
-            >
-              ☰
-            </button>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+              <button
+                onClick={() => cambiarTamano(-1)}
+                aria-label="Achicar letra"
+                disabled={tamanoIndice === 0}
+                style={{
+                  background: 'none',
+                  border: '1px solid rgba(232, 227, 216, 0.15)',
+                  borderRadius: '6px',
+                  color: tamanoIndice === 0 ? '#5a5f66' : '#e8e3d8',
+                  fontSize: '0.75rem',
+                  fontFamily: "'Inter', Arial, sans-serif",
+                  padding: '4px 8px',
+                  cursor: tamanoIndice === 0 ? 'default' : 'pointer',
+                  touchAction: 'manipulation',
+                }}
+              >
+                A-
+              </button>
+              <button
+                onClick={() => cambiarTamano(1)}
+                aria-label="Agrandar letra"
+                disabled={tamanoIndice === TAMANOS.length - 1}
+                style={{
+                  background: 'none',
+                  border: '1px solid rgba(232, 227, 216, 0.15)',
+                  borderRadius: '6px',
+                  color: tamanoIndice === TAMANOS.length - 1 ? '#5a5f66' : '#e8e3d8',
+                  fontSize: '1rem',
+                  fontFamily: "'Inter', Arial, sans-serif",
+                  padding: '4px 8px',
+                  cursor: tamanoIndice === TAMANOS.length - 1 ? 'default' : 'pointer',
+                  touchAction: 'manipulation',
+                }}
+              >
+                A+
+              </button>
+
+              <button
+                onClick={() => setMenuAbierto(!menuAbierto)}
+                className="boton-hamburguesa"
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  color: '#e8e3d8',
+                  fontSize: '1.5rem',
+                  cursor: 'pointer',
+                  padding: '5px 10px',
+                  touchAction: 'manipulation',
+                  display: 'block'
+                }}
+                aria-label="Menú"
+              >
+                ☰
+              </button>
+            </div>
           </div>
 
           <nav style={{
@@ -98,7 +157,7 @@ export default function Layout({ children, mostrarHeader = true }) {
 
           <style jsx>{`
             @media (min-width: 768px) {
-              button {
+              .boton-hamburguesa {
                 display: none !important;
               }
               nav {
