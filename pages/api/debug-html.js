@@ -3,6 +3,7 @@
 // Uso: ?url=...&find=...&offset=N
 // Siempre responde 200 (aunque la fuente falle) para poder ver el error real.
 import axios from 'axios';
+import https from 'https';
 
 export default async function handler(req, res) {
   const target = req.query.url || 'https://lecturasdeldia.org/';
@@ -15,6 +16,7 @@ export default async function handler(req, res) {
     const respuesta = await axios.get(target, {
       headers: { 'User-Agent': 'liturgia-diaria-personal-app/1.0' },
       timeout: 20000,
+      ...(req.query.insecure ? { httpsAgent: new https.Agent({ rejectUnauthorized: false }) } : {}),
       validateStatus: () => true,
       responseType: 'text',
       transformResponse: (d) => d,
